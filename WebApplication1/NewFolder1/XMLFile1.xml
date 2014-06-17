@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<FundInfo>
+  <类型></类型>
+  <风险等级>
+    <低风险>False</低风险>
+    <较低风险>False</较低风险>
+    <中风险>False</中风险>
+    <较高风险>False</较高风险>
+    <高风险>False</高风险>
+  </风险等级>
+  <Description />
+  <Setup>
+    <货币型>11</货币型>
+    <股票型>22</股票型>
+    <债券型>33</债券型>
+  </Setup>
+</FundInfo>

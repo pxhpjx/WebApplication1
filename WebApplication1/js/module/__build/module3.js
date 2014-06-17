@@ -1,0 +1,1 @@
+define("module/module3.js",[],function(e,t){t.m3=function(){alert("module3alert")}});

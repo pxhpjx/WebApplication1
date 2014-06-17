@@ -1,0 +1,727 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A732BEB3-C4D6-41F6-A69B-4C3337F01B9E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebApplication1</RootNamespace>
+    <AssemblyName>WebApplication1</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Em.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Em.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MongoDB.Bson, Version=0.9.0.3992, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\FundSyncService\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=1.7.0.4714, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDBHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\MongoDBHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Passport.Common, Version=1.0.4289.27325, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\Passport.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Service.CoreProcess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\Service.CoreProcess.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="base64.aspx" />
+    <Content Include="chartdemo\chartfloat.js" />
+    <Content Include="chartdemo\chartfix.js" />
+    <Content Include="chartdemo\chartfix.aspx" />
+    <Content Include="chartdemo\chartfloat.aspx" />
+    <Content Include="classequal.aspx" />
+    <Content Include="clone.aspx" />
+    <Content Include="continualGet.aspx" />
+    <Content Include="convert.aspx" />
+    <Content Include="cpumemery.aspx" />
+    <Content Include="css\base.css">
+      <DependentUpon>base.scss</DependentUpon>
+    </Content>
+    <Content Include="css\init.css">
+      <DependentUpon>init.scss</DependentUpon>
+    </Content>
+    <Content Include="css\reset.css">
+      <DependentUpon>reset.scss</DependentUpon>
+    </Content>
+    <Content Include="datetime.aspx" />
+    <Content Include="default.aspx" />
+    <Content Include="dele.aspx" />
+    <Content Include="des.aspx" />
+    <Content Include="dic.aspx" />
+    <Content Include="dicexist.aspx" />
+    <Content Include="dll\MongoDB.Bson.dll" />
+    <Content Include="dll\MongoDB.dll" />
+    <Content Include="dll\MongoDB.Driver.dll" />
+    <Content Include="dll\MongoDBHelper.dll" />
+    <Content Include="dll\Newtonsoft.Json.dll" />
+    <Content Include="dll\Passport.Common.dll" />
+    <Content Include="dll\Service.CoreProcess.dll" />
+    <Content Include="Em.Entities.dll" />
+    <Content Include="em.enum.aspx" />
+    <Content Include="fileupload.aspx" />
+    <Content Include="htmldecode.aspx" />
+    <Content Include="httpruntimecache.aspx" />
+    <Content Include="Inheritance.aspx" />
+    <Content Include="json.aspx" />
+    <Content Include="jstest.html" />
+    <Content Include="js\jquery.js" />
+    <Content Include="js\jstest\CoffeeScript1.js">
+      <DependentUpon>CoffeeScript1.coffee</DependentUpon>
+    </Content>
+    <Content Include="js\jstest\CoffeeScript2.js">
+      <DependentUpon>CoffeeScript2.coffee</DependentUpon>
+    </Content>
+    <Content Include="js\module\module1.js" />
+    <Content Include="js\module\module2.js" />
+    <Content Include="js\jq\jquery-debug.js" />
+    <Content Include="js\jq\jquery.js" />
+    <Content Include="js\module\module3.js" />
+    <Content Include="js\sea.js" />
+    <Content Include="js\seajs\plugin-combo.js" />
+    <Content Include="js\seajs\plugin-debug.js" />
+    <Content Include="js\seajs\plugin-flush.js" />
+    <Content Include="js\seajs\plugin-nocache.js" />
+    <Content Include="js\seajs\plugin-shim.js" />
+    <Content Include="js\seajs\plugin-style.js" />
+    <Content Include="js\seajs\plugin-text.js" />
+    <Content Include="js\seajs\plugin-warning.js" />
+    <Content Include="js\seajs\sea-debug.js" />
+    <Content Include="js\seajs\sea.js" />
+    <Content Include="listfind.aspx" />
+    <Content Include="log.aspx" />
+    <Content Include="memorycache.aspx" />
+    <Content Include="newclass.aspx" />
+    <Content Include="NewFolder1\erheawh.aspx" />
+    <Content Include="erwrsthb.aspx" />
+    <Content Include="NewFolder1\backgroundbuttom.png" />
+    <Content Include="NewFolder1\backgroundmain.png" />
+    <Content Include="NewFolder1\backgroundtop.png" />
+    <Content Include="NewFolder1\CoffeeScript1.js">
+      <DependentUpon>CoffeeScript1.coffee</DependentUpon>
+    </Content>
+    <Content Include="NewFolder1\CoffeeScript2.js">
+      <DependentUpon>CoffeeScript2.coffee</DependentUpon>
+    </Content>
+    <Content Include="NewFolder1\HtmlPage1.html" />
+    <Content Include="NewFolder1\jquery.js" />
+    <Content Include="NewFolder1\WebForm1.aspx" />
+    <Content Include="NewFolder1\WebForm2.aspx" />
+    <Content Include="oracle.aspx" />
+    <Content Include="outref.aspx" />
+    <Content Include="pic\2MLQWGTf92.jpg" />
+    <Content Include="pic\2MLTMIViVh.jpg" />
+    <Content Include="pic\2SFp3i2UhQ.jpg" />
+    <Content Include="post.aspx" />
+    <Content Include="Properties\DataSources\System.Data.DataTable.datasource" />
+    <Content Include="js\jstest\CoffeeScript1.coffee" />
+    <Content Include="js\jstest\CoffeeScript2.coffee" />
+    <Content Include="js\package203.json" />
+    <Content Include="js\seajs\sea.js.map" />
+    <Content Include="js\package.json" />
+    <Content Include="css\base.scss" />
+    <Content Include="css\init.scss" />
+    <Content Include="css\reset.scss" />
+    <Content Include="ref.aspx" />
+    <Content Include="regex.aspx" />
+    <Content Include="response.aspx" />
+    <Content Include="Serialize.aspx" />
+    <Content Include="Service References\VC\VerifyCode.disco" />
+    <Content Include="Service References\VC\configuration91.svcinfo" />
+    <Content Include="Service References\VC\configuration.svcinfo" />
+    <Content Include="Service References\VC\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="string.aspx" />
+    <Content Include="stringarry.aspx" />
+    <Content Include="stringsplit.aspx" />
+    <Content Include="struct.aspx" />
+    <Content Include="theadtimeout.aspx" />
+    <Content Include="threadpool.aspx" />
+    <Content Include="try.aspx" />
+    <Content Include="type.aspx" />
+    <Content Include="unicode.aspx" />
+    <Content Include="valuecopy.aspx" />
+    <Content Include="wcf.aspx" />
+    <Content Include="xml.aspx" />
+    <Content Include="xmltest.aspx" />
+    <Content Include="Config.config" />
+    <Content Include="zhengze.aspx" />
+    <None Include="Service References\FundWebService\FundWebService.disco" />
+    <None Include="Service References\FundWebService\configuration91.svcinfo" />
+    <None Include="Service References\FundWebService\configuration.svcinfo" />
+    <None Include="Service References\FundWebService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="readfile2entity.aspx" />
+    <Content Include="sessiontest.aspx" />
+    <Content Include="switchtest.html" />
+    <Content Include="threadsleepsuspend.aspx" />
+    <Content Include="thrtshstr.aspx" />
+    <Content Include="uc\upload.ascx" />
+    <Content Include="Web.config" />
+    <Content Include="retbrwb.aspx" />
+    <Content Include="WebForm1.aspx" />
+    <Content Include="WebForm2.aspx" />
+    <Content Include="NewFolder1\WebForm3.aspx" />
+    <Content Include="NewFolder1\XMLFile1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="base64.aspx.cs">
+      <DependentUpon>base64.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="base64.aspx.designer.cs">
+      <DependentUpon>base64.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="chartdemo\chartfix.aspx.cs">
+      <DependentUpon>chartfix.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="chartdemo\chartfix.aspx.designer.cs">
+      <DependentUpon>chartfix.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="chartdemo\chartfloat.aspx.cs">
+      <DependentUpon>chartfloat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="chartdemo\chartfloat.aspx.designer.cs">
+      <DependentUpon>chartfloat.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="classequal.aspx.cs">
+      <DependentUpon>classequal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="classequal.aspx.designer.cs">
+      <DependentUpon>classequal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Class_SyncJJZB.cs" />
+    <Compile Include="clone.aspx.cs">
+      <DependentUpon>clone.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="clone.aspx.designer.cs">
+      <DependentUpon>clone.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="continualGet.aspx.cs">
+      <DependentUpon>continualGet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="continualGet.aspx.designer.cs">
+      <DependentUpon>continualGet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="convert.aspx.cs">
+      <DependentUpon>convert.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="convert.aspx.designer.cs">
+      <DependentUpon>convert.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cpumemery.aspx.cs">
+      <DependentUpon>cpumemery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cpumemery.aspx.designer.cs">
+      <DependentUpon>cpumemery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="datetime.aspx.cs">
+      <DependentUpon>datetime.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="datetime.aspx.designer.cs">
+      <DependentUpon>datetime.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dele.aspx.cs">
+      <DependentUpon>dele.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dele.aspx.designer.cs">
+      <DependentUpon>dele.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="des.aspx.cs">
+      <DependentUpon>des.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="des.aspx.designer.cs">
+      <DependentUpon>des.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dic.aspx.cs">
+      <DependentUpon>dic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dic.aspx.designer.cs">
+      <DependentUpon>dic.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dicexist.aspx.cs">
+      <DependentUpon>dicexist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dicexist.aspx.designer.cs">
+      <DependentUpon>dicexist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="em.enum.aspx.cs">
+      <DependentUpon>em.enum.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="em.enum.aspx.designer.cs">
+      <DependentUpon>em.enum.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fileupload.aspx.cs">
+      <DependentUpon>fileupload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fileupload.aspx.designer.cs">
+      <DependentUpon>fileupload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="htmldecode.aspx.cs">
+      <DependentUpon>htmldecode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="htmldecode.aspx.designer.cs">
+      <DependentUpon>htmldecode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="httpruntimecache.aspx.cs">
+      <DependentUpon>httpruntimecache.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="httpruntimecache.aspx.designer.cs">
+      <DependentUpon>httpruntimecache.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Inheritance.aspx.cs">
+      <DependentUpon>Inheritance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inheritance.aspx.designer.cs">
+      <DependentUpon>Inheritance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="json.aspx.cs">
+      <DependentUpon>json.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="json.aspx.designer.cs">
+      <DependentUpon>json.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="listfind.aspx.cs">
+      <DependentUpon>listfind.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="listfind.aspx.designer.cs">
+      <DependentUpon>listfind.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="log.aspx.cs">
+      <DependentUpon>log.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="log.aspx.designer.cs">
+      <DependentUpon>log.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="memorycache.aspx.cs">
+      <DependentUpon>memorycache.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="memorycache.aspx.designer.cs">
+      <DependentUpon>memorycache.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="newclass.aspx.cs">
+      <DependentUpon>newclass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="newclass.aspx.designer.cs">
+      <DependentUpon>newclass.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewFolder1\erheawh.aspx.cs">
+      <DependentUpon>erheawh.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewFolder1\erheawh.aspx.designer.cs">
+      <DependentUpon>erheawh.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="erwrsthb.aspx.cs">
+      <DependentUpon>erwrsthb.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="erwrsthb.aspx.designer.cs">
+      <DependentUpon>erwrsthb.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewFolder1\Class1.cs" />
+    <Compile Include="NewFolder1\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewFolder1\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewFolder1\WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewFolder1\WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="oracle.aspx.cs">
+      <DependentUpon>oracle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="oracle.aspx.designer.cs">
+      <DependentUpon>oracle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="outref.aspx.cs">
+      <DependentUpon>outref.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="outref.aspx.designer.cs">
+      <DependentUpon>outref.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="post.aspx.cs">
+      <DependentUpon>post.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="post.aspx.designer.cs">
+      <DependentUpon>post.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="readfile2entity.aspx.cs">
+      <DependentUpon>readfile2entity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="readfile2entity.aspx.designer.cs">
+      <DependentUpon>readfile2entity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ref.aspx.cs">
+      <DependentUpon>ref.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ref.aspx.designer.cs">
+      <DependentUpon>ref.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="regex.aspx.cs">
+      <DependentUpon>regex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="regex.aspx.designer.cs">
+      <DependentUpon>regex.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="response.aspx.cs">
+      <DependentUpon>response.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="response.aspx.designer.cs">
+      <DependentUpon>response.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="retbrwb.aspx.cs">
+      <DependentUpon>retbrwb.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="retbrwb.aspx.designer.cs">
+      <DependentUpon>retbrwb.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Serialize.aspx.cs">
+      <DependentUpon>Serialize.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Serialize.aspx.designer.cs">
+      <DependentUpon>Serialize.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\FundWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\VC\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="sessiontest.aspx.cs">
+      <DependentUpon>sessiontest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sessiontest.aspx.designer.cs">
+      <DependentUpon>sessiontest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="string.aspx.cs">
+      <DependentUpon>string.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="string.aspx.designer.cs">
+      <DependentUpon>string.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="stringarry.aspx.cs">
+      <DependentUpon>stringarry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="stringarry.aspx.designer.cs">
+      <DependentUpon>stringarry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="stringsplit.aspx.cs">
+      <DependentUpon>stringsplit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="stringsplit.aspx.designer.cs">
+      <DependentUpon>stringsplit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="struct.aspx.cs">
+      <DependentUpon>struct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="struct.aspx.designer.cs">
+      <DependentUpon>struct.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="theadtimeout.aspx.cs">
+      <DependentUpon>theadtimeout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="theadtimeout.aspx.designer.cs">
+      <DependentUpon>theadtimeout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="threadpool.aspx.cs">
+      <DependentUpon>threadpool.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="threadpool.aspx.designer.cs">
+      <DependentUpon>threadpool.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="threadsleepsuspend.aspx.cs">
+      <DependentUpon>threadsleepsuspend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="threadsleepsuspend.aspx.designer.cs">
+      <DependentUpon>threadsleepsuspend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="thrtshstr.aspx.cs">
+      <DependentUpon>thrtshstr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="thrtshstr.aspx.designer.cs">
+      <DependentUpon>thrtshstr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="try.aspx.cs">
+      <DependentUpon>try.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="try.aspx.designer.cs">
+      <DependentUpon>try.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="type.aspx.cs">
+      <DependentUpon>type.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="type.aspx.designer.cs">
+      <DependentUpon>type.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="uc\upload.ascx.cs">
+      <DependentUpon>upload.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="uc\upload.ascx.designer.cs">
+      <DependentUpon>upload.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="unicode.aspx.cs">
+      <DependentUpon>unicode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="unicode.aspx.designer.cs">
+      <DependentUpon>unicode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="valuecopy.aspx.cs">
+      <DependentUpon>valuecopy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="valuecopy.aspx.designer.cs">
+      <DependentUpon>valuecopy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wcf.aspx.cs">
+      <DependentUpon>wcf.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wcf.aspx.designer.cs">
+      <DependentUpon>wcf.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewFolder1\WebForm3.aspx.cs">
+      <DependentUpon>WebForm3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewFolder1\WebForm3.aspx.designer.cs">
+      <DependentUpon>WebForm3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="xml.aspx.cs">
+      <DependentUpon>xml.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="xml.aspx.designer.cs">
+      <DependentUpon>xml.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="xmltest.aspx.cs">
+      <DependentUpon>xmltest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="xmltest.aspx.designer.cs">
+      <DependentUpon>xmltest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="zhengze.aspx.cs">
+      <DependentUpon>zhengze.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="zhengze.aspx.designer.cs">
+      <DependentUpon>zhengze.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NewFolder1\CoffeeScript1.coffee" />
+    <Content Include="NewFolder1\ClassDiagram1.cd" />
+    <Content Include="NewFolder1\CoffeeScript2.coffee" />
+    <None Include="Service References\FundWebService\FundWebService.wsdl" />
+    <Content Include="Service References\VC\VerifyCode.wsdl" />
+    <None Include="Service References\VC\VerifyCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\VC\VerifyCode1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\VC\VerifyCode2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\VC\WebApplication1.VC.CodeCheckResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\FundWebService\" />
+    <WCFMetadataStorage Include="Service References\VC\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DevLayer\DevLayer.csproj">
+      <Project>{f1121104-feae-41bf-ae1d-26f3a261398b}</Project>
+      <Name>DevLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>6067</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1234/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,78 @@
+@charset "UTF-8";
+/* Margin */
+@mixin margin($dist){margin:$dist;}
+@mixin margintop($dist){margin-top:$dist;}
+@mixin marginright($dist){margin-right:$dist;}
+@mixin marginbottom($dist){margin-bottom:$dist;}
+@mixin marginleft($dist){margin-left:$dist;}
+/* Padding */
+@mixin padding($dist){padding:$dist;}
+@mixin paddingtop($dist){padding-top:$dist;}
+@mixin paddingright($idst){padding-right:$dist;}
+@mixin paddingbottom($dist){padding-bottom:$dist;}
+@mixin paddingleft($dist){padding-left:$dist;}
+/* 宽 */
+@mixin width($w){width:$w;}
+/* 高 */
+@mixin height($h){height:$h;}
+@mixin lineheight($h){line-height:$h;}
+/* 背景 */
+@mixin background($val){background:$val;}
+@mixin backgroundimage($url){ background-image:$url;}
+@mixin backgroundrepeat($repeat){ background-image:$repeat;}
+@mixin backgroundattach($attach){ background-image:$attach;}
+@mixin backgroundleft($left){ background-image:$left;}
+@mixin backgroundtop($top){ background-image:$top;}
+@mixin backgroundcolor($color){ background-image:$color;}
+/* 字体 */
+@mixin font($style,$size,$line,$family){font:$style $size/$line $family;}
+@mixin fontweight($weight){font-weight:$weight;}
+@mixin fontsize($size){font-size:$size;}
+@mixin fontline($line){line-height:$line;}
+@mixin fontfamily($family){font-family:$family;}
+/* 颜色 */
+@mixin color($rgb){color:$rgb;}
+$black:#333;//黑色
+$red:#DC0000;//红色
+$green:#097C25;//绿色
+$blue:#039;//蓝色
+$gray:#CCC;//灰色
+$white:#fff;//白色
+/* 链接 */
+@mixin underline{text-decoration:underline;}
+@mixin nounderline{text-decoration:none;}
+/* 边框 */
+@mixin border($width,$style,$color){border:$width $style $color;}
+@mixin border($val){border:$val;}
+@mixin bordertop($width,$style,$color){border-top:$width $style $color;}
+@mixin borderright($width,$style,$color){border-right:$width $style $color;}
+@mixin borderbottom($width,$style,$color){border-bottom:$width $style $color;}
+@mixin borderleft($width,$style,$color){border-left:$width $style $color;}
+/* 对齐 */
+@mixin textalign($val){text-align:$val;}
+@mixin verticalalign($val){vertical-align:$val;}
+/* 显示 */
+@mixin display($val){display:$val;}
+@mixin overflow($val){overflow:$val;}
+/* 浮动 */
+@mixin float($val){float:$val;}
+/* 清除浮动 */
+@mixin clearafter{content:'\0020';clear:both;height:0px;display:block; overflow: hidden; zoom:1}
+@mixin clear{*zoom:1;}
+@mixin _clear{clear:both;}
+/* 布局 */
+@mixin position($val){position:$val;}
+@mixin top($val){top:$val;}
+@mixin right($val){right:$val;}
+@mixin bottom($val){bottom:$val;}
+@mixin left($val){left:$val;}
+@mixin zindex($val){z-index:$val;}
+/* ul样式 */
+@mixin liststyle($val){list-style:$val;}
+/* 表格 */
+@mixin table{@include width(100%);border-collapse:collapse;border-spacing:0;}
+/* 轮 */
+@mixin outline($val){ outline:none;}
+@mixin outlinewidth($val){ outline-width:$val;}
+@mixin outlinestyle($val){ outline-style:$val;}
+@mixin outlinecolor($val){ outline-color:$val;}

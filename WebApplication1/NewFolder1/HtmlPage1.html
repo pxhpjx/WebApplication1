@@ -1,0 +1,64 @@
+﻿<html>
+<head>
+    <style type="text/css">
+        .popWindow {
+            text-align: center;
+            z-index: 2;
+            width: 500px;
+            height: 300px;
+            left: 50%;
+            top: 50%;
+            margin-left: -250px;
+            margin-top: -150px;
+            position: absolute;
+            background: #FFFFFF;
+        }
+
+        .head-box {
+            width: 500px;
+            height: 25px;
+            background: #4A4AFF;
+        }
+
+        .maskLayer {
+            background-color: #9D9D9D;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            filter: alpha(opacity=50);
+            opacity: 0.5;
+            z-index: 1;
+            position: absolute;
+        }
+    </style>
+    <script type="text/javascript">
+
+        function showDiv() {
+            document.getElementById('popWindow').style.display = 'block';
+            document.getElementById('maskLayer').style.display = 'block';
+        }
+        function closeDiv() {
+            document.getElementById('popWindow').style.display = 'none';
+            document.getElementById('maskLayer').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <div onclick="showDiv()" style="display: block; cursor: pointer">
+        Show covert DIV
+    </div>
+    1235
+    <div id="popWindow" class="popWindow" style="display: none;">
+        <div class="head-box" style="text-align: right;">
+            <a href="#" onclick="closeDiv()" style="cursor: pointer; text-decoration: none;">
+                <span style="font-size: 20px;">  X  </span></a>
+        </div>
+        <div class="body-box">
+            <input type="button" value="Back" onclick="closeDiv()" style="cursor: pointer" />
+        </div>
+    </div>
+    <div id="maskLayer" class="maskLayer" style="display: none;">
+    </div>
+</body>
+</html>

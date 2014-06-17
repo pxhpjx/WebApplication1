@@ -1,0 +1,12 @@
+{
+  "name":"name",
+  "root":"js",
+  "version":"2.2.2", 
+  "spm": {
+  	"source": "module",
+  	"output": ["module1.js"],
+  	"engines": {
+  		"seajs": "sea.js"
+  	}
+  }
+}

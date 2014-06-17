@@ -1,0 +1,18 @@
+﻿{
+    "name": "hello-seajs",
+    "version": "1.0.0",
+    "dependencies": {
+    },
+    "root": "apps",
+    "output": {
+        "main.js": ".",
+        "i18n": "i18n/**/*.js",
+        "tpl": "tpl/**/*.tpl"
+    },
+    "spmConfig": {    
+        "build": {
+            "src": "module",
+            "to": "dist/{{root}}/{{name}}/{{version}}"
+        }
+    }
+}

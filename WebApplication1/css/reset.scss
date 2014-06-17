@@ -1,0 +1,31 @@
+@charset "UTF-8";
+@import "base";
+/* reset */
+body,div,ul,ol,dl,li,h1,h2,h3,h4,h5,form,input,button {@include margin(0);@include padding(0);@include backgroundcolor(none);}
+img{@include border(none);}
+table{@include table;}
+h1,h2,h3,h4,h5 {@include fontweight(normal);}
+ul{@include liststyle(none);}
+:focus {@include outline(none);}
+a { 
+	color:$blue;@include nounderline;
+	&:hover{color:$red;@include underline;}
+}
+.space0 {@include _clear;@include height(0);@include overflow(hidden);}
+.hide {@include display(none);}
+
+/* 背景图 */
+.demo{@include background(none no-repeat scroll 0 0 transparent)}
+/* 容器 */
+.mbox { @include width(1000px);@include margin(0 auto);}
+
+
+
+
+
+/* 正文用到相同背景图元素(范例) */
+.demo2{@extend .demo;}
+
+
+
+
