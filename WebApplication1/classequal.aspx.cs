@@ -11,6 +11,7 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            b BB = new b();
             a c1 = new a();
             a c2 = new a();
             a c3 = new a();
@@ -27,5 +28,15 @@ namespace WebApplication1
     class a
     {
         public string s;
+    }
+
+    class b
+    {
+        private a aa;
+        public a AA
+        {
+            get { return aa; }
+            set { aa = value; }
+        }
     }
 }

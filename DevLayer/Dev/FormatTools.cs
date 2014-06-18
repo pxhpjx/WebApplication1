@@ -95,7 +95,6 @@ namespace WebApplication1
             return result;
         }
 
-
         /// <summary>
         /// 转化任意数据为long（无效返回0）
         /// </summary>
@@ -342,6 +341,21 @@ namespace WebApplication1
         }
 
         /// <summary>
+        /// 检查是否有0项
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static bool IsAnyZero(params int[] nums)
+        {
+            if (nums == null)
+                return false;
+            foreach (int num in nums)
+                if (num == 0)
+                    return true;
+            return false;
+        }
+
+        /// <summary>
         /// 过滤SQL敏感词
         /// </summary>
         /// <param name="input"></param>
@@ -566,19 +580,12 @@ namespace WebApplication1
             bool isExecFinished = false;
             T result = default(T);
             Thread th = new Thread(() => { result = func(); isExecFinished = true; });
-            Timer t = null;
             try
             {
                 th.Start();
-                t = new Timer(new System.Threading.TimerCallback(th.Abort), null, timeOut, int.MaxValue);
-                while (!isExecFinished && th.IsAlive)
-                {
-                    Thread.Sleep(50);
-                }
+                SpinWait.SpinUntil(() => (isExecFinished || !th.IsAlive), timeOut);
             }
             catch { }
-            if (t != null)
-                t.Dispose();
             if (th.IsAlive)
                 th.Abort();
 

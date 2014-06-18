@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Threading;
+using System.Diagnostics;
 
 namespace WebApplication1
 {
@@ -12,6 +13,13 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            bool b;
+            FormatTools.ExecFuncWithTimeOut<bool>(() => NC("dd"), 5000, out b);
+            sw.Stop();
+            string s = "";
+
             Thread th1 = new Thread((ThreadStart)(delegate
                 {
                     while (true)
@@ -41,6 +49,13 @@ namespace WebApplication1
                     }
                 }));
             th2.Start();
+        }
+
+        private bool NC(string s)
+        {
+            while (true)
+            { }
+            return false;
         }
     }
 }
