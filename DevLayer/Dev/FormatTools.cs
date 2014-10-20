@@ -592,5 +592,26 @@ namespace WebApplication1
             output = result;
             return isExecFinished;
         }
+
+        public static void QuickDispose<T>(T source) where T : IDisposable
+        {
+            if (source != null)
+                source.Dispose();
+        }
+
+        public static string TrimSpaces(string str, int minCount = 2, int maxCount = 999)
+        {
+            if (string.IsNullOrWhiteSpace(str))
+                return str;
+            str = str.Trim();
+            Regex reg = new Regex(" {" + minCount.ToString() + "," + maxCount.ToString() + "}");
+            Match m = reg.Match(str);
+            while (m.Success)
+            {
+                str = str.Replace(m.Value, "");
+                m = reg.Match(str);
+            }
+            return str;
+        }
     }
 }

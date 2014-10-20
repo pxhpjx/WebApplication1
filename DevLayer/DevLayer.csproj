@@ -47,7 +47,9 @@
     <Compile Include="Dev\FormatTools.cs" />
     <Compile Include="Dev\FTOth.cs" />
     <Compile Include="Dev\LogRecord.cs" />
+    <Compile Include="Dev\RandomBox.cs" />
     <Compile Include="Dev\ResultInfo.cs" />
+    <Compile Include="Dev\StringCompareTool.cs" />
     <Compile Include="Dev\XmlSplitter.cs" />
     <Compile Include="Import\FTImp.cs" />
     <Compile Include="Import\MD5.cs" />

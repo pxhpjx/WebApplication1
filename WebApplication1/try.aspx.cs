@@ -14,11 +14,20 @@ namespace WebApplication1
             string s = "33333";
             try
             {
+                throw new ArgumentException("?");
                 char c = s[34];
             }
-            finally
+            catch (ArgumentNullException anex)
             {
             }
+            //catch (ArgumentException aex)
+            //{
+            //}
+            //catch
+            //{ }
+            //finally
+            //{
+            //}
         }
     }
 }

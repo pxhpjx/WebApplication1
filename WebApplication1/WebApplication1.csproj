@@ -43,6 +43,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\Em.Entities.dll</HintPath>
     </Reference>
+    <Reference Include="Lucene.Net, Version=2.9.2.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\Lucene.Net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MongoDB.Bson, Version=0.9.0.3992, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -59,6 +63,18 @@
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>dll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PanGu, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\PanGu.dll</HintPath>
+    </Reference>
+    <Reference Include="PanGu.HighLight, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\PanGu.HighLight.dll</HintPath>
+    </Reference>
+    <Reference Include="PanGu.Lucene.Analyzer, Version=1.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\PanGu.Lucene.Analyzer.dll</HintPath>
     </Reference>
     <Reference Include="Passport.Common, Version=1.0.4289.27325, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -89,8 +105,13 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="XMS.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\XMS.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="attr.aspx" />
     <Content Include="base64.aspx" />
     <Content Include="chartdemo\chartfloat.js" />
     <Content Include="chartdemo\chartfix.js" />
@@ -98,6 +119,7 @@
     <Content Include="chartdemo\chartfloat.aspx" />
     <Content Include="classequal.aspx" />
     <Content Include="clone.aspx" />
+    <Content Include="CompareInt.aspx" />
     <Content Include="continualGet.aspx" />
     <Content Include="convert.aspx" />
     <Content Include="cpumemery.aspx" />
@@ -112,23 +134,51 @@
     </Content>
     <Content Include="datetime.aspx" />
     <Content Include="default.aspx" />
+    <Content Include="define.aspx" />
     <Content Include="dele.aspx" />
     <Content Include="des.aspx" />
     <Content Include="dic.aspx" />
     <Content Include="dicexist.aspx" />
+    <Content Include="Dict\ChsDoubleName1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dict\ChsDoubleName2.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dict\ChsSingleName.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dict\Stopword.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dict\Synonym.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dict\Wildcard.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dll\Lucene.Net.dll" />
     <Content Include="dll\MongoDB.Bson.dll" />
     <Content Include="dll\MongoDB.dll" />
     <Content Include="dll\MongoDB.Driver.dll" />
     <Content Include="dll\MongoDBHelper.dll" />
     <Content Include="dll\Newtonsoft.Json.dll" />
+    <Content Include="dll\PanGu.dll" />
+    <Content Include="dll\PanGu.HighLight.dll" />
+    <Content Include="dll\PanGu.Lucene.Analyzer.dll" />
     <Content Include="dll\Passport.Common.dll" />
     <Content Include="dll\Service.CoreProcess.dll" />
+    <Content Include="dll\XMS.Core.dll" />
     <Content Include="Em.Entities.dll" />
     <Content Include="em.enum.aspx" />
-    <Content Include="fileupload.aspx" />
+    <Content Include="file.aspx" />
+    <Content Include="foreach.aspx" />
+    <Content Include="getset.aspx" />
     <Content Include="htmldecode.aspx" />
     <Content Include="httpruntimecache.aspx" />
+    <Content Include="index.aspx" />
     <Content Include="Inheritance.aspx" />
+    <Content Include="ip.aspx" />
     <Content Include="json.aspx" />
     <Content Include="jstest.html" />
     <Content Include="js\jquery.js" />
@@ -156,6 +206,7 @@
     <Content Include="js\seajs\sea.js" />
     <Content Include="listfind.aspx" />
     <Content Include="log.aspx" />
+    <Content Include="logrec.aspx" />
     <Content Include="memorycache.aspx" />
     <Content Include="newclass.aspx" />
     <Content Include="NewFolder1\erheawh.aspx" />
@@ -178,6 +229,7 @@
     <Content Include="pic\2MLQWGTf92.jpg" />
     <Content Include="pic\2MLTMIViVh.jpg" />
     <Content Include="pic\2SFp3i2UhQ.jpg" />
+    <Content Include="ping.aspx" />
     <Content Include="post.aspx" />
     <Content Include="Properties\DataSources\System.Data.DataTable.datasource" />
     <Content Include="js\jstest\CoffeeScript1.coffee" />
@@ -201,19 +253,31 @@
     </Content>
     <Content Include="string.aspx" />
     <Content Include="stringarry.aspx" />
+    <Content Include="stringbuilder.aspx" />
+    <Content Include="stringmatch.aspx" />
     <Content Include="stringsplit.aspx" />
     <Content Include="struct.aspx" />
     <Content Include="theadtimeout.aspx" />
+    <Content Include="this.aspx" />
     <Content Include="threadpool.aspx" />
+    <Content Include="throwerror.aspx" />
+    <Content Include="trimspace.aspx" />
     <Content Include="try.aspx" />
     <Content Include="type.aspx" />
     <Content Include="unicode.aspx" />
+    <Content Include="Upload.aspx" />
     <Content Include="valuecopy.aspx" />
     <Content Include="wcf.aspx" />
+    <Content Include="webrequest.aspx" />
+    <Content Include="WordSplit.aspx" />
     <Content Include="xml.aspx" />
     <Content Include="xmltest.aspx" />
     <Content Include="Config.config" />
     <Content Include="zhengze.aspx" />
+    <Content Include="packages.config" />
+    <Content Include="Dict\Dict.dct">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Service References\FundWebService\FundWebService.disco" />
     <None Include="Service References\FundWebService\configuration91.svcinfo" />
     <None Include="Service References\FundWebService\configuration.svcinfo" />
@@ -227,7 +291,9 @@
     <Content Include="threadsleepsuspend.aspx" />
     <Content Include="thrtshstr.aspx" />
     <Content Include="uc\upload.ascx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="retbrwb.aspx" />
     <Content Include="WebForm1.aspx" />
     <Content Include="WebForm2.aspx" />
@@ -235,6 +301,13 @@
     <Content Include="NewFolder1\XMLFile1.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="attr.aspx.cs">
+      <DependentUpon>attr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="attr.aspx.designer.cs">
+      <DependentUpon>attr.aspx</DependentUpon>
+    </Compile>
     <Compile Include="base64.aspx.cs">
       <DependentUpon>base64.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -271,6 +344,13 @@
     <Compile Include="clone.aspx.designer.cs">
       <DependentUpon>clone.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CompareInt.aspx.cs">
+      <DependentUpon>CompareInt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CompareInt.aspx.designer.cs">
+      <DependentUpon>CompareInt.aspx</DependentUpon>
+    </Compile>
     <Compile Include="continualGet.aspx.cs">
       <DependentUpon>continualGet.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -305,6 +385,13 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="define.aspx.cs">
+      <DependentUpon>define.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="define.aspx.designer.cs">
+      <DependentUpon>define.aspx</DependentUpon>
     </Compile>
     <Compile Include="dele.aspx.cs">
       <DependentUpon>dele.aspx</DependentUpon>
@@ -341,12 +428,26 @@
     <Compile Include="em.enum.aspx.designer.cs">
       <DependentUpon>em.enum.aspx</DependentUpon>
     </Compile>
-    <Compile Include="fileupload.aspx.cs">
-      <DependentUpon>fileupload.aspx</DependentUpon>
+    <Compile Include="file.aspx.cs">
+      <DependentUpon>file.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="fileupload.aspx.designer.cs">
-      <DependentUpon>fileupload.aspx</DependentUpon>
+    <Compile Include="file.aspx.designer.cs">
+      <DependentUpon>file.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="foreach.aspx.cs">
+      <DependentUpon>foreach.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="foreach.aspx.designer.cs">
+      <DependentUpon>foreach.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="getset.aspx.cs">
+      <DependentUpon>getset.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="getset.aspx.designer.cs">
+      <DependentUpon>getset.aspx</DependentUpon>
     </Compile>
     <Compile Include="htmldecode.aspx.cs">
       <DependentUpon>htmldecode.aspx</DependentUpon>
@@ -362,12 +463,26 @@
     <Compile Include="httpruntimecache.aspx.designer.cs">
       <DependentUpon>httpruntimecache.aspx</DependentUpon>
     </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Inheritance.aspx.cs">
       <DependentUpon>Inheritance.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Inheritance.aspx.designer.cs">
       <DependentUpon>Inheritance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ip.aspx.cs">
+      <DependentUpon>ip.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ip.aspx.designer.cs">
+      <DependentUpon>ip.aspx</DependentUpon>
     </Compile>
     <Compile Include="json.aspx.cs">
       <DependentUpon>json.aspx</DependentUpon>
@@ -389,6 +504,13 @@
     </Compile>
     <Compile Include="log.aspx.designer.cs">
       <DependentUpon>log.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="logrec.aspx.cs">
+      <DependentUpon>logrec.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="logrec.aspx.designer.cs">
+      <DependentUpon>logrec.aspx</DependentUpon>
     </Compile>
     <Compile Include="memorycache.aspx.cs">
       <DependentUpon>memorycache.aspx</DependentUpon>
@@ -446,6 +568,13 @@
     </Compile>
     <Compile Include="outref.aspx.designer.cs">
       <DependentUpon>outref.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ping.aspx.cs">
+      <DependentUpon>ping.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ping.aspx.designer.cs">
+      <DependentUpon>ping.aspx</DependentUpon>
     </Compile>
     <Compile Include="post.aspx.cs">
       <DependentUpon>post.aspx</DependentUpon>
@@ -527,6 +656,20 @@
     <Compile Include="stringarry.aspx.designer.cs">
       <DependentUpon>stringarry.aspx</DependentUpon>
     </Compile>
+    <Compile Include="stringbuilder.aspx.cs">
+      <DependentUpon>stringbuilder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="stringbuilder.aspx.designer.cs">
+      <DependentUpon>stringbuilder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="stringmatch.aspx.cs">
+      <DependentUpon>stringmatch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="stringmatch.aspx.designer.cs">
+      <DependentUpon>stringmatch.aspx</DependentUpon>
+    </Compile>
     <Compile Include="stringsplit.aspx.cs">
       <DependentUpon>stringsplit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -548,6 +691,13 @@
     <Compile Include="theadtimeout.aspx.designer.cs">
       <DependentUpon>theadtimeout.aspx</DependentUpon>
     </Compile>
+    <Compile Include="this.aspx.cs">
+      <DependentUpon>this.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="this.aspx.designer.cs">
+      <DependentUpon>this.aspx</DependentUpon>
+    </Compile>
     <Compile Include="threadpool.aspx.cs">
       <DependentUpon>threadpool.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -562,12 +712,26 @@
     <Compile Include="threadsleepsuspend.aspx.designer.cs">
       <DependentUpon>threadsleepsuspend.aspx</DependentUpon>
     </Compile>
+    <Compile Include="throwerror.aspx.cs">
+      <DependentUpon>throwerror.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="throwerror.aspx.designer.cs">
+      <DependentUpon>throwerror.aspx</DependentUpon>
+    </Compile>
     <Compile Include="thrtshstr.aspx.cs">
       <DependentUpon>thrtshstr.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="thrtshstr.aspx.designer.cs">
       <DependentUpon>thrtshstr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="trimspace.aspx.cs">
+      <DependentUpon>trimspace.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="trimspace.aspx.designer.cs">
+      <DependentUpon>trimspace.aspx</DependentUpon>
     </Compile>
     <Compile Include="try.aspx.cs">
       <DependentUpon>try.aspx</DependentUpon>
@@ -596,6 +760,13 @@
     </Compile>
     <Compile Include="unicode.aspx.designer.cs">
       <DependentUpon>unicode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Upload.aspx.cs">
+      <DependentUpon>Upload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Upload.aspx.designer.cs">
+      <DependentUpon>Upload.aspx</DependentUpon>
     </Compile>
     <Compile Include="valuecopy.aspx.cs">
       <DependentUpon>valuecopy.aspx</DependentUpon>
@@ -631,6 +802,20 @@
     </Compile>
     <Compile Include="NewFolder1\WebForm3.aspx.designer.cs">
       <DependentUpon>WebForm3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="webrequest.aspx.cs">
+      <DependentUpon>webrequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webrequest.aspx.designer.cs">
+      <DependentUpon>webrequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WordSplit.aspx.cs">
+      <DependentUpon>WordSplit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WordSplit.aspx.designer.cs">
+      <DependentUpon>WordSplit.aspx</DependentUpon>
     </Compile>
     <Compile Include="xml.aspx.cs">
       <DependentUpon>xml.aspx</DependentUpon>

@@ -66,23 +66,25 @@ namespace WebApplication1
                 return;
 
             FileStream stream = null;
+            StreamWriter writer = null;
             try
             {
                 if (!Directory.Exists(dirPath))
                     Directory.CreateDirectory(dirPath);
 
                 stream = new FileStream(Path.Combine(dirPath, fileName), fileMode, FileAccess.Write);
-                StreamWriter writer = new StreamWriter(stream, Encoding.GetEncoding(encoding));
+                writer = new StreamWriter(stream, Encoding.GetEncoding(encoding));
                 writer.BaseStream.Seek(0, SeekOrigin.End);
                 foreach (string str in content)
                     writer.WriteLine(str);
                 writer.Flush();
-                writer.Close();
             }
             catch (Exception ex)
             {
                 WriteLog("Save Error：" + ex.Message, "SelfError");
             }
+            if (writer != null)
+                writer.Close();
             if (stream != null)
                 stream.Close();
         }
@@ -98,19 +100,21 @@ namespace WebApplication1
         private static void WriteFile(string dirPath, string fileName, string content, string encoding = "UTF-8", FileMode fileMode = FileMode.OpenOrCreate)
         {
             FileStream stream = null;
+            StreamWriter writer = null;
             try
             {
                 if (!Directory.Exists(dirPath))
                     Directory.CreateDirectory(dirPath);
 
                 stream = new FileStream(Path.Combine(dirPath, fileName), fileMode, FileAccess.Write);
-                StreamWriter writer = new StreamWriter(stream, Encoding.GetEncoding(encoding));
+                writer = new StreamWriter(stream, Encoding.GetEncoding(encoding));
                 writer.BaseStream.Seek(0, SeekOrigin.End);
                 writer.WriteLine(content);
                 writer.Flush();
-                writer.Close();
             }
             catch { }
+            if (writer != null)
+                writer.Close();
             if (stream != null)
                 stream.Close();
         }
@@ -118,13 +122,15 @@ namespace WebApplication1
         public static string ReadFile(string filePath, string encoding = "UTF-8")
         {
             string result = null;
+            StreamReader reader = null;
             try
             {
-                StreamReader reader = new StreamReader(filePath, UnicodeEncoding.GetEncoding(encoding));
+                reader = new StreamReader(filePath, UnicodeEncoding.GetEncoding(encoding));
                 result = reader.ReadToEnd();
-                reader.Close();
             }
             catch { }
+            if (reader != null)
+                reader.Close();
             return result;
         }
 
@@ -179,7 +185,7 @@ namespace WebApplication1
                 string[] Files = System.IO.Directory.GetFiles(LogPath + (string.IsNullOrWhiteSpace(Subfolder) ? "" : "\\") + Subfolder, "*.xml");
                 if (Amount > Files.Length)
                     Amount = Files.Length;
-                for (int i = Files.Length - 1; i >= Files.Length - Amount; i--)
+                for (int i = Files[0].Length - 1; i >= Files.Length - Amount; i--)
                 {
                     XmlDocument Doc = new XmlDocument();
                     Doc.Load(Files[i]);
@@ -200,6 +206,7 @@ namespace WebApplication1
         public static List<T> ReadXmlLogs<T>(int Amount, string Subfolder = "")
         {
             List<T> Result = new List<T>();
+            XmlReader xr = null;
             try
             {
                 string[] Files = System.IO.Directory.GetFiles(LogPath + (string.IsNullOrWhiteSpace(Subfolder) ? "" : "\\") + Subfolder, "*.xml");
@@ -208,12 +215,14 @@ namespace WebApplication1
                 for (int i = Files.Length - 1; i >= Files.Length - Amount; i--)
                 {
                     XmlSerializer serializer = new XmlSerializer(typeof(T));
-                    XmlReader xr = XmlReader.Create(Files[i], null);
+                    xr = XmlReader.Create(Files[i], null);
                     T x = (T)serializer.Deserialize(xr);
                     Result.Add(x);
                 }
             }
             catch { }
+            if (xr != null)
+                xr.Close();
             return Result;
         }
 
@@ -226,13 +235,19 @@ namespace WebApplication1
         public static void WriteSerXmlLog<T>(T item, string Subfolder = "")
         {
             XmlDocument xml = new XmlDocument();
-            XmlSerializer serializer = new XmlSerializer(typeof(T));
-            string Path = LogPath + "\\" + Subfolder;
-            if (!Directory.Exists(Path))
-                Directory.CreateDirectory(Path);
-            XmlWriter xw = XmlWriter.Create(Path + (Subfolder != "" ? "\\" : "") + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".xml");
-            serializer.Serialize(xw, item);
-            xw.Close();
+            XmlWriter xw = null;
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(T));
+                string Path = LogPath + "\\" + Subfolder;
+                if (!Directory.Exists(Path))
+                    Directory.CreateDirectory(Path);
+                xw = XmlWriter.Create(Path + (Subfolder != "" ? "\\" : "") + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".xml");
+                serializer.Serialize(xw, item);
+            }
+            catch { }
+            if (xw != null)
+                xw.Close();
         }
 
         /// <summary>
@@ -243,15 +258,21 @@ namespace WebApplication1
         /// <returns></returns>
         public static T ReadSerXmlLog<T>(string Path)
         {
-            if (File.Exists(Path))
+            T result = default(T);
+            XmlReader xr = null;
+            try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(T));
-                XmlReader xr = XmlReader.Create(Path, null);
-                T x = (T)serializer.Deserialize(xr);
-                return x;
+                if (File.Exists(Path))
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(T));
+                    xr = XmlReader.Create(Path, null);
+                    result = (T)serializer.Deserialize(xr);
+                }
             }
-            else
-                return default(T);
+            catch { }
+            if (xr != null)
+                xr.Close();
+            return result;
         }
 
         #endregion

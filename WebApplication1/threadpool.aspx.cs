@@ -15,6 +15,10 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            System.Threading.Thread th = new Thread(() => { });
+
+
+
             int[] ar = { 1, 2 };
             ThreadPool.QueueUserWorkItem(new WaitCallback(calc), ar);
 
