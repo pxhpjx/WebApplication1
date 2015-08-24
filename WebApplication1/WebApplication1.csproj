@@ -90,16 +90,16 @@
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -111,7 +111,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="as.aspx" />
     <Content Include="attr.aspx" />
+    <Content Include="AutoSupply.aspx" />
     <Content Include="base64.aspx" />
     <Content Include="chartdemo\chartfloat.js" />
     <Content Include="chartdemo\chartfix.js" />
@@ -120,6 +122,7 @@
     <Content Include="classequal.aspx" />
     <Content Include="clone.aspx" />
     <Content Include="CompareInt.aspx" />
+    <Content Include="CompareValueChange.aspx" />
     <Content Include="continualGet.aspx" />
     <Content Include="convert.aspx" />
     <Content Include="cpumemery.aspx" />
@@ -171,9 +174,12 @@
     <Content Include="dll\XMS.Core.dll" />
     <Content Include="Em.Entities.dll" />
     <Content Include="em.enum.aspx" />
+    <Content Include="encode.aspx" />
     <Content Include="file.aspx" />
     <Content Include="foreach.aspx" />
     <Content Include="getset.aspx" />
+    <Content Include="guid.aspx" />
+    <Content Include="hashtablet.aspx" />
     <Content Include="htmldecode.aspx" />
     <Content Include="httpruntimecache.aspx" />
     <Content Include="index.aspx" />
@@ -204,9 +210,11 @@
     <Content Include="js\seajs\plugin-warning.js" />
     <Content Include="js\seajs\sea-debug.js" />
     <Content Include="js\seajs\sea.js" />
+    <Content Include="list.aspx" />
     <Content Include="listfind.aspx" />
     <Content Include="log.aspx" />
     <Content Include="logrec.aspx" />
+    <Content Include="md55.aspx" />
     <Content Include="memorycache.aspx" />
     <Content Include="newclass.aspx" />
     <Content Include="NewFolder1\erheawh.aspx" />
@@ -226,6 +234,7 @@
     <Content Include="NewFolder1\WebForm2.aspx" />
     <Content Include="oracle.aspx" />
     <Content Include="outref.aspx" />
+    <Content Include="overwrite.aspx" />
     <Content Include="pic\2MLQWGTf92.jpg" />
     <Content Include="pic\2MLTMIViVh.jpg" />
     <Content Include="pic\2SFp3i2UhQ.jpg" />
@@ -240,17 +249,11 @@
     <Content Include="css\base.scss" />
     <Content Include="css\init.scss" />
     <Content Include="css\reset.scss" />
+    <Content Include="PutRequest.aspx" />
     <Content Include="ref.aspx" />
     <Content Include="regex.aspx" />
     <Content Include="response.aspx" />
     <Content Include="Serialize.aspx" />
-    <Content Include="Service References\VC\VerifyCode.disco" />
-    <Content Include="Service References\VC\configuration91.svcinfo" />
-    <Content Include="Service References\VC\configuration.svcinfo" />
-    <Content Include="Service References\VC\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
     <Content Include="string.aspx" />
     <Content Include="stringarry.aspx" />
     <Content Include="stringbuilder.aspx" />
@@ -261,14 +264,16 @@
     <Content Include="this.aspx" />
     <Content Include="threadpool.aspx" />
     <Content Include="throwerror.aspx" />
+    <Content Include="timer.aspx" />
     <Content Include="trimspace.aspx" />
     <Content Include="try.aspx" />
     <Content Include="type.aspx" />
+    <Content Include="ua.aspx" />
     <Content Include="unicode.aspx" />
     <Content Include="Upload.aspx" />
     <Content Include="valuecopy.aspx" />
-    <Content Include="wcf.aspx" />
     <Content Include="webrequest.aspx" />
+    <Content Include="where.aspx" />
     <Content Include="WordSplit.aspx" />
     <Content Include="xml.aspx" />
     <Content Include="xmltest.aspx" />
@@ -301,12 +306,26 @@
     <Content Include="NewFolder1\XMLFile1.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="as.aspx.cs">
+      <DependentUpon>as.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="as.aspx.designer.cs">
+      <DependentUpon>as.aspx</DependentUpon>
+    </Compile>
     <Compile Include="attr.aspx.cs">
       <DependentUpon>attr.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="attr.aspx.designer.cs">
       <DependentUpon>attr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AutoSupply.aspx.cs">
+      <DependentUpon>AutoSupply.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AutoSupply.aspx.designer.cs">
+      <DependentUpon>AutoSupply.aspx</DependentUpon>
     </Compile>
     <Compile Include="base64.aspx.cs">
       <DependentUpon>base64.aspx</DependentUpon>
@@ -350,6 +369,13 @@
     </Compile>
     <Compile Include="CompareInt.aspx.designer.cs">
       <DependentUpon>CompareInt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompareValueChange.aspx.cs">
+      <DependentUpon>CompareValueChange.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CompareValueChange.aspx.designer.cs">
+      <DependentUpon>CompareValueChange.aspx</DependentUpon>
     </Compile>
     <Compile Include="continualGet.aspx.cs">
       <DependentUpon>continualGet.aspx</DependentUpon>
@@ -428,6 +454,13 @@
     <Compile Include="em.enum.aspx.designer.cs">
       <DependentUpon>em.enum.aspx</DependentUpon>
     </Compile>
+    <Compile Include="encode.aspx.cs">
+      <DependentUpon>encode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="encode.aspx.designer.cs">
+      <DependentUpon>encode.aspx</DependentUpon>
+    </Compile>
     <Compile Include="file.aspx.cs">
       <DependentUpon>file.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -448,6 +481,20 @@
     </Compile>
     <Compile Include="getset.aspx.designer.cs">
       <DependentUpon>getset.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="guid.aspx.cs">
+      <DependentUpon>guid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="guid.aspx.designer.cs">
+      <DependentUpon>guid.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="hashtablet.aspx.cs">
+      <DependentUpon>hashtablet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="hashtablet.aspx.designer.cs">
+      <DependentUpon>hashtablet.aspx</DependentUpon>
     </Compile>
     <Compile Include="htmldecode.aspx.cs">
       <DependentUpon>htmldecode.aspx</DependentUpon>
@@ -491,6 +538,13 @@
     <Compile Include="json.aspx.designer.cs">
       <DependentUpon>json.aspx</DependentUpon>
     </Compile>
+    <Compile Include="list.aspx.cs">
+      <DependentUpon>list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="list.aspx.designer.cs">
+      <DependentUpon>list.aspx</DependentUpon>
+    </Compile>
     <Compile Include="listfind.aspx.cs">
       <DependentUpon>listfind.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -511,6 +565,13 @@
     </Compile>
     <Compile Include="logrec.aspx.designer.cs">
       <DependentUpon>logrec.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="md55.aspx.cs">
+      <DependentUpon>md55.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="md55.aspx.designer.cs">
+      <DependentUpon>md55.aspx</DependentUpon>
     </Compile>
     <Compile Include="memorycache.aspx.cs">
       <DependentUpon>memorycache.aspx</DependentUpon>
@@ -569,6 +630,13 @@
     <Compile Include="outref.aspx.designer.cs">
       <DependentUpon>outref.aspx</DependentUpon>
     </Compile>
+    <Compile Include="overwrite.aspx.cs">
+      <DependentUpon>overwrite.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="overwrite.aspx.designer.cs">
+      <DependentUpon>overwrite.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ping.aspx.cs">
       <DependentUpon>ping.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -584,6 +652,13 @@
       <DependentUpon>post.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PutRequest.aspx.cs">
+      <DependentUpon>PutRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PutRequest.aspx.designer.cs">
+      <DependentUpon>PutRequest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="readfile2entity.aspx.cs">
       <DependentUpon>readfile2entity.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -626,11 +701,6 @@
       <DependentUpon>Serialize.aspx</DependentUpon>
     </Compile>
     <Compile Include="Service References\FundWebService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\VC\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -726,6 +796,13 @@
     <Compile Include="thrtshstr.aspx.designer.cs">
       <DependentUpon>thrtshstr.aspx</DependentUpon>
     </Compile>
+    <Compile Include="timer.aspx.cs">
+      <DependentUpon>timer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="timer.aspx.designer.cs">
+      <DependentUpon>timer.aspx</DependentUpon>
+    </Compile>
     <Compile Include="trimspace.aspx.cs">
       <DependentUpon>trimspace.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -746,6 +823,13 @@
     </Compile>
     <Compile Include="type.aspx.designer.cs">
       <DependentUpon>type.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ua.aspx.cs">
+      <DependentUpon>ua.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ua.aspx.designer.cs">
+      <DependentUpon>ua.aspx</DependentUpon>
     </Compile>
     <Compile Include="uc\upload.ascx.cs">
       <DependentUpon>upload.ascx</DependentUpon>
@@ -775,13 +859,6 @@
     <Compile Include="valuecopy.aspx.designer.cs">
       <DependentUpon>valuecopy.aspx</DependentUpon>
     </Compile>
-    <Compile Include="wcf.aspx.cs">
-      <DependentUpon>wcf.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="wcf.aspx.designer.cs">
-      <DependentUpon>wcf.aspx</DependentUpon>
-    </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -809,6 +886,13 @@
     </Compile>
     <Compile Include="webrequest.aspx.designer.cs">
       <DependentUpon>webrequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="where.aspx.cs">
+      <DependentUpon>where.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="where.aspx.designer.cs">
+      <DependentUpon>where.aspx</DependentUpon>
     </Compile>
     <Compile Include="WordSplit.aspx.cs">
       <DependentUpon>WordSplit.aspx</DependentUpon>
@@ -844,19 +928,6 @@
     <Content Include="NewFolder1\ClassDiagram1.cd" />
     <Content Include="NewFolder1\CoffeeScript2.coffee" />
     <None Include="Service References\FundWebService\FundWebService.wsdl" />
-    <Content Include="Service References\VC\VerifyCode.wsdl" />
-    <None Include="Service References\VC\VerifyCode.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\VC\VerifyCode1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\VC\VerifyCode2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="Service References\VC\WebApplication1.VC.CodeCheckResult.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -869,7 +940,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\FundWebService\" />
-    <WCFMetadataStorage Include="Service References\VC\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DevLayer\DevLayer.csproj">

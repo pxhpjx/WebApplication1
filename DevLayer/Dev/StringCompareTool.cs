@@ -5,6 +5,10 @@ using System.Text;
 
 namespace DevLayer.Dev
 {
+    /// <summary>
+    /// PP's StringCompareTool -20150427 ver-
+    /// 文本比较工具，可以按照文字正向顺序进行匹配度检测
+    /// </summary>
     public static class StringCompareTool
     {
         public static StrCmpResult StringMatchWithStrictOrder(string str1, string str2, int minMacthWords = 2, string ignoreChars = " ()（）")
@@ -24,33 +28,28 @@ namespace DevLayer.Dev
             while (i1 < str1.Length && i2 < str2.Length)
             {
                 int i2t = str2.IndexOf(str1[i1], i2);
-                if (i2t < 0)
+                if (i2t < 0 || i1 + minMacthWords > str1.Length || i2t + minMacthWords > str2.Length)
                 {
                     i1++;
                     continue;
                 }
-                i2 = i2t;
-                if (i1 + minMacthWords > str1.Length || i2 + minMacthWords > str2.Length)
-                    break;
                 int lenght = 2;
-                while (str1[i1 + lenght - 1] == str2[i2 + lenght - 1])
+                while (str1[i1 + lenght - 1] == str2[i2t + lenght - 1])
                 {
-                    if (i1 + lenght >= str1.Length || i2 + lenght >= str2.Length)
+                    if (i1 + lenght >= str1.Length || i2t + lenght >= str2.Length)
                         break;
                     lenght++;
                 }
-                lenght--;
+                if (i1 + lenght < str1.Length && i2t + lenght < str2.Length)
+                    lenght--;
                 if (lenght >= minMacthWords)
                 {
                     matchs.Add(str1.Substring(i1, lenght));
                     i1 += lenght;
-                    i2 += lenght;
+                    i2 = i2t + lenght;
                 }
                 else
-                {
                     i1++;
-                    i2++;
-                }
             }
             result.Matchs = matchs.ToArray();
             result.Str1MatchRate = Math.Round(1.0 * matchs.Sum(item => item.Length) / str1.Length, 2);

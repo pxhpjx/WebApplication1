@@ -69,7 +69,7 @@ namespace WebApplication1
             XmlSerializer serializer = new XmlSerializer(typeof(T));
             XmlWriter xw = XmlWriter.Create("C:\\xxx.xml");
             serializer.Serialize(xw, item);
-
+            xw.Close();
         }
         T ReadSerXml<T>(string Path)
         {

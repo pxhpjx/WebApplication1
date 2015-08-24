@@ -12,7 +12,7 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var r = StringCompareTool.StringMatchWithStrictOrder("小辉哥火锅(大宁国际商业广场店)", "小辉哥火锅 大宁国际店");
+            var r = StringCompareTool.StringMatchWithStrictOrder("秦淮区中山东路18号国贸大厦6楼", "正洪街18号东宇大厦5楼", 3);
         }
     }
 }

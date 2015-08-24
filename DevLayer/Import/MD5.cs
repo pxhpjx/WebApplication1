@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Fund.Web.Admin.Web.CommonLayer
+namespace DevLayer.Import
 {
     public static class MD5
     {

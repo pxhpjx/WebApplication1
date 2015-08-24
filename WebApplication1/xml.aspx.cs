@@ -12,7 +12,14 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            XmlSplitter.SplitByNode("");
+            List<string> ls = new List<string>();
+            ls.Add("1");
+            ls.Add("11");
+            ls.Add("111");
+
+
+            //LogRecord.WriteSerXmlLog(ls);
+            var r = LogRecord.ReadSerXmlLog<List<string>>(@"F:\Projects\WebApplication1\WebApplication1\log\20150205171413038.xml");
         }
     }
 }

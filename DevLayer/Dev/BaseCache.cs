@@ -12,7 +12,7 @@ namespace Fund.Web.Admin.Web.CommonLayer
     {
         public static void SetAbsolute(string key, object obj, double CacheSeconds, CacheItemPriority Level = CacheItemPriority.Normal)
         {
-            HttpRuntime.Cache.Insert(key, obj, null, DateTime.UtcNow.AddSeconds(CacheSeconds), System.Web.Caching.Cache.NoSlidingExpiration, Level, null);
+            HttpRuntime.Cache.Insert(key, obj, null, DateTime.Now.AddSeconds(CacheSeconds), System.Web.Caching.Cache.NoSlidingExpiration, Level, null);
         }
 
         public static void SetSliding(string key, object obj, int CacheSeconds, CacheItemPriority Level = CacheItemPriority.Normal)

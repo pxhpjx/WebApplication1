@@ -60,6 +60,14 @@ namespace WebApplication1
 
 
             List<int> li = new List<int>();
+            li.Add(1);
+            li.Add(1);
+            li.Add(1);
+            int[] ai = new int[] { 1, 23, 4 };
+
+            List<int> rli = FormatTools.ValueCopy(li);
+            int[] rai = FormatTools.ValueCopy(ai);
+
             Type lit = li.GetType();
             bool idarr = lit.IsArray;
         }

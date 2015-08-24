@@ -7,11 +7,12 @@ using System.Net;
 using System.IO;
 using System.Reflection;
 using System.Threading;
+using System.Security.Cryptography;
 
 namespace WebApplication1
 {
     /// <summary>
-    /// PP's FormatTools -20140320 ver-
+    /// PP's FormatTools -20150821 ver-
     /// 数据格式转化工具
     /// </summary>
     public static class FormatTools
@@ -139,7 +140,7 @@ namespace WebApplication1
 
         /// <summary>
         /// 转化任意数据为DateTime（无效返回new DateTime()）
-        /// 特别的，可以识别YYYYMMDD格式的8位数字并进行转化
+        /// 特别的，可以识别yyyyMMdd格式的8位数字并进行转化
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -148,14 +149,18 @@ namespace WebApplication1
             DateTime result;
             if (obj != null && DateTime.TryParse(obj.ToString(), out result))
                 return result;
-            if (obj != null && obj.ToString().Length == 8 && ParseInt(obj) > 0)
-                return new DateTime(ParseInt(obj.ToString().Substring(0, 4)), ParseInt(obj.ToString().Substring(4, 2)), ParseInt(obj.ToString().Substring(6, 2)));
-            return new DateTime();
+            try
+            {
+                if (obj != null && obj.ToString().Length == 8 && ParseInt(obj) > 0)
+                    return new DateTime(ParseInt(obj.ToString().Substring(0, 4)), ParseInt(obj.ToString().Substring(4, 2)), ParseInt(obj.ToString().Substring(6, 2)));
+            }
+            catch { }
+            return default(DateTime);
         }
 
         /// <summary>
         /// 转化任意数据为DateTime（无效返回null）
-        /// 特别的，可以识别YYYYMMDD格式的8位数字并进行转化
+        /// 特别的，可以识别yyyyMMdd格式的8位数字并进行转化
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -164,8 +169,12 @@ namespace WebApplication1
             DateTime result;
             if (obj != null && DateTime.TryParse(obj.ToString(), out result))
                 return result;
-            if (obj != null && obj.ToString().Length == 8 && ParseInt(obj) > 0)
-                return new DateTime(ParseInt(obj.ToString().Substring(0, 4)), ParseInt(obj.ToString().Substring(4, 2)), ParseInt(obj.ToString().Substring(6, 2)));
+            try
+            {
+                if (obj != null && obj.ToString().Length == 8 && ParseInt(obj) > 0)
+                    return new DateTime(ParseInt(obj.ToString().Substring(0, 4)), ParseInt(obj.ToString().Substring(4, 2)), ParseInt(obj.ToString().Substring(6, 2)));
+            }
+            catch { }
             return null;
         }
 
@@ -180,13 +189,13 @@ namespace WebApplication1
         }
 
         /// <summary>
-        /// 转化任意数据为string（无效返回""）
+        /// 转化任意数据为string（无效返回string.Empty）
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
         public static string ParseStringE(object obj)
         {
-            return obj == null ? "" : obj.ToString();
+            return obj == null ? string.Empty : obj.ToString();
         }
 
         /// <summary>
@@ -304,6 +313,133 @@ namespace WebApplication1
             {
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Base64编码字符串转化为byte[]
+        /// 可以自动处理UrlSafe的字符串，可以自动填充
+        /// </summary>
+        /// <param name="strBase64"></param>
+        /// <returns></returns>
+        public static byte[] GetBase64Array(string strBase64)
+        {
+            if (string.IsNullOrEmpty(strBase64))
+                return null;
+
+            strBase64 = strBase64.Replace("-", "+").Replace("_", "/");
+            int i = 0;
+            Byte[] result = null;
+            while (result == null && i < 3)
+            {
+                try
+                {
+                    result = Convert.FromBase64String(strBase64);
+                }
+                catch
+                {
+                    strBase64 += "=";
+                    i++;
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// byte[]转化为UTF8字符串
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns></returns>
+        public static string GetUTF8String(byte[] array)
+        {
+            if (array == null || array.Length == 0)
+                return null;
+            try
+            {
+                return Encoding.UTF8.GetString(array);
+            }
+            catch { }
+            return null;
+        }
+
+        /// <summary>
+        /// byte[]转化为Base64字符串
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns></returns>
+        public static string GetBase64String(byte[] array)
+        {
+            if (array == null || array.Length == 0)
+                return null;
+            try
+            {
+                return Convert.ToBase64String(array);
+            }
+            catch { }
+            return null;
+        }
+
+        /// <summary>
+        /// AES解密
+        /// </summary>
+        /// <param name="toDecryptArray"></param>
+        /// <param name="key"></param>
+        /// <param name="cm"></param>
+        /// <param name="pm"></param>
+        /// <returns></returns>
+        public static byte[] AESDecrypt(byte[] toDecryptArray, byte[] key, CipherMode cm = CipherMode.ECB, PaddingMode pm = PaddingMode.PKCS7)
+        {
+            if (toDecryptArray == null || key == null)
+                return null;
+            try
+            {
+                RijndaelManaged rm = new RijndaelManaged();
+                rm.Key = key;
+                rm.Mode = cm;
+                rm.Padding = pm;
+                return rm.CreateDecryptor().TransformFinalBlock(toDecryptArray, 0, toDecryptArray.Length);
+            }
+            catch { }
+            return null;
+        }
+
+        /// <summary>
+        /// AES加密
+        /// </summary>
+        /// <param name="toEncryptArray"></param>
+        /// <param name="key"></param>
+        /// <param name="cm"></param>
+        /// <param name="pm"></param>
+        /// <returns></returns>
+        public static byte[] AESEncrypt(byte[] toEncryptArray, byte[] key, CipherMode cm = CipherMode.ECB, PaddingMode pm = PaddingMode.PKCS7)
+        {
+            if (toEncryptArray == null || key == null)
+                return null;
+            try
+            {
+                RijndaelManaged rm = new RijndaelManaged();
+                rm.Key = key;
+                rm.Mode = cm;
+                rm.Padding = pm;
+                return rm.CreateEncryptor().TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+            }
+            catch { }
+            return null;
+        }
+
+        /// <summary>
+        /// 获取Dictionary值
+        /// 如果不存在对应Key，则返回Value类型默认值
+        /// </summary>
+        /// <typeparam name="T1"></typeparam>
+        /// <typeparam name="T2"></typeparam>
+        /// <param name="dic"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static T2 GetDicValue<T1, T2>(Dictionary<T1, T2> dic, T1 key)
+        {
+            if (dic == null || !dic.ContainsKey(key))
+                return default(T2);
+            return dic[key];
         }
 
         #endregion
@@ -487,14 +623,52 @@ namespace WebApplication1
                         p.SetValue(Result, ElementValue, null);
                     }
                 }
-                catch { }
+                catch { Result = default(T); }
+            }
+            return Result;
+        }
+
+        /// <summary>
+        /// 简单复制类的值。
+        /// 可以对属性对应的不相关的类进行复制。
+        /// 类中含有引用类型字段时，会 导致引用复制该字段。
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static T2 SampleCopy<T1, T2>(T1 input) where T2 : class,new()
+        {
+            T2 Result = null;
+            if (input != null)
+            {
+                try
+                {
+                    Result = new T2();
+                    PropertyInfo[] t1Props = typeof(T1).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                    PropertyInfo[] t2Props = typeof(T2).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                    foreach (PropertyInfo p in t1Props)
+                    {
+                        object ElementValue = p.GetValue(input, null);
+                        PropertyInfo p2 = t2Props.FirstOrDefault(item => item.Name == p.Name);
+                        try
+                        {
+                            if (p2 != null)
+                                p2.SetValue(Result, ElementValue, null);
+                        }
+                        catch { }
+                    }
+                }
+                catch
+                {
+                    Result = default(T2);
+                }
             }
             return Result;
         }
 
         /// <summary>
         /// Developing
-        /// 完全复制类与结构的值。不能用于复制List。
+        /// 完全复制类与结构的值。不能用于复制数组集合类型。
         /// 无论类中是否含有引用类型字段，都 不会 复制引用，而是创建一个具有相同值的副本。
         /// 除非input为object，否则不需要强制指定inputType。inputType与T不统一时，无法进行复制。
         /// </summary>
@@ -510,15 +684,17 @@ namespace WebApplication1
                 try
                 {
                     Type type = (inputType == null ? typeof(T) : inputType);
+                    if (type.IsArray || type.Namespace == "System.Collections.Generic")
+                        return result;
+                    if (type.IsValueType || type.FullName == "System.String")
+                        //{
+                        //if (Props == null)
+                        //    return input;
+                        //if (Props.ToList().Find(item => !item.PropertyType.IsValueType) == null)
+                        return input;
+                    //}
                     result = (T)Activator.CreateInstance(type);
                     PropertyInfo[] Props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
-                    if (type.IsValueType)
-                    {
-                        if (Props == null)
-                            return input;
-                        if (Props.ToList().Find(item => !item.PropertyType.IsValueType) == null)
-                            return input;
-                    }
                     foreach (PropertyInfo p in Props)
                     {
                         Type t = p.PropertyType;
@@ -599,6 +775,13 @@ namespace WebApplication1
                 source.Dispose();
         }
 
+        /// <summary>
+        /// 移除字符串中的指定范围之内的连续空格
+        /// </summary>
+        /// <param name="str">需要处理的字符串</param>
+        /// <param name="minCount">连续空格数量最小值</param>
+        /// <param name="maxCount">连续空格数量最大值</param>
+        /// <returns></returns>
         public static string TrimSpaces(string str, int minCount = 2, int maxCount = 999)
         {
             if (string.IsNullOrWhiteSpace(str))
@@ -612,6 +795,133 @@ namespace WebApplication1
                 m = reg.Match(str);
             }
             return str;
+        }
+
+        /// <summary>
+        /// 切出字符串中指定位置开始指定数目的部分，切出部分会被从源字符串中移除
+        /// 若允许越界，越界时自动停止并返回；否则按出错处理
+        /// </summary>
+        /// <param name="input">需要处理的字符串</param>
+        /// <param name="cutLen">需要切出字符串的长度</param>
+        /// <param name="cutStart">需要切出字符串的开始位置</param>
+        /// <param name="allowOverstep">是否允许越界</param>
+        /// <returns></returns>
+        public static string CutOutString(ref string input, int cutLen, int cutStart = 0, bool allowOverstep = false)
+        {
+            if (string.IsNullOrWhiteSpace(input) || cutLen <= 0 || cutStart < 0 || cutStart > input.Length)
+                return null;
+
+            string result = null;
+            if (input.Length < cutLen + cutStart)
+            {
+                if (!allowOverstep)
+                    return result;
+                result = input.Substring(cutStart);
+                input = input.Remove(cutStart);
+                return result;
+            }
+            result = input.Substring(cutStart, cutLen);
+            input = input.Remove(cutStart, cutLen);
+            return result;
+        }
+
+        /// <summary>
+        /// 按位取出指定位置开始的字符串
+        /// </summary>
+        /// <param name="input">需要处理的字符串</param>
+        /// <param name="encoding">字符编码</param>
+        /// <param name="cutLen">获取字符串的长度</param>
+        /// <param name="cutStart">取出字符串的起始位置</param>
+        /// <param name="isNeedCutOut">是否需要从源字符串中切出</param>
+        /// <returns></returns>
+        public static string GetStringByByte(ref string input, Encoding encoding, int cutLen, int cutStart = 0, bool isNeedCutOut = true)
+        {
+            if (string.IsNullOrWhiteSpace(input) || encoding == null || cutLen <= 0 || cutStart < 0)
+                return null;
+
+            string result = string.Empty, ir = input;
+            int cur = 0, esp = 0;
+            while (cur < input.Length)
+            {
+                char cc = input[cur];
+                byte[] bs = encoding.GetBytes(new char[] { cc });
+                if (encoding.GetBytes(result).Length + bs.Length > cutLen)
+                    return null;
+                if (esp >= cutStart)
+                    result += input[cur];
+                if (encoding.GetBytes(result).Length == cutLen)
+                {
+                    if (isNeedCutOut)
+                        input = input.Remove(input.IndexOf(result), result.Length);
+                    return result;
+                }
+                esp += bs.Length;
+                cur++;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 读取\\uXXXX格式的UTF8字符串
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string ReadUTF8String(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+                return input;
+            string result = null;
+            string[] arr = input.Split(new string[] { "\\u" }, StringSplitOptions.RemoveEmptyEntries);
+            try
+            {
+                foreach (string s in arr)
+                    result += (char)Convert.ToInt32(s.Substring(0, 4), 16) + s.Substring(4);
+                return result;
+            }
+            catch { }
+            return null;
+        }
+
+        /// <summary>
+        /// 比较两个同类型实体，提取出值不相同的字段
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="oldObject">旧的实体</param>
+        /// <param name="newObject">新的实体</param>
+        /// <param name="ignore">忽略的字段名</param>
+        /// <returns></returns>
+        public static string CompareValue<T>(T oldObject, T newObject, List<string> ignore = null) where T : class,new()
+        {
+            if (oldObject == null && newObject == null)
+                return null;
+            oldObject = oldObject ?? new T();
+            newObject = newObject ?? new T();
+
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                Type type = typeof(T);
+                PropertyInfo[] Props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                foreach (PropertyInfo p in Props)
+                {
+                    if (ignore != null && ignore.Contains(p.Name))
+                        continue;
+                    object oldValue = p.GetValue(oldObject, null);
+                    object newValue = p.GetValue(newObject, null);
+                    string o = null, n = null;
+                    if (oldValue != null)
+                        o = oldValue.ToString();
+                    if (newValue != null)
+                        n = newValue.ToString();
+                    if (o != n)
+                        sb.AppendFormat("PropertyName:{0},OldValue:{1},NewValue:{2}|", p.Name, o, n);
+                }
+                return sb.ToString().TrimEnd('|');
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

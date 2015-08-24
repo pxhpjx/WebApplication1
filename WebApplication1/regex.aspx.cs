@@ -15,11 +15,11 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            string sssp = "[{\"TypeName\":\"District\",\"OldValue\":\"5\",\"NewValue\":\"5555\"}]";
+            string sssp = "http://i1.s1.dpfile.com/2008-02-01/330397_b.jpg(139c100)/thumb.jpg";
             string ssp = "[{\"TypeName\":\"ResName\",\"OldValue\":\"\",\"NewValue\":\"一线烫捞(金虹桥店)\"},{\"TypeName\":\"ShopName\",\"OldValue\":\"\",\"NewValue\":\"金虹桥店\"},{\"TypeName\":\"CuisineIds\",\"OldValue\":\"\",\"NewValue\":\"221\"},{\"TypeName\":\"RegionIds\",\"OldValue\":\"\",\"NewValue\":\"840\"},{\"TypeName\":\"BusinessStatus\",\"OldValue\":\"\",\"NewValue\":\"正常\"},{\"TypeName\":\"Address\",\"OldValue\":\"\",\"NewValue\":\"茅台路179号金虹桥国际中心商场\"},{\"TypeName\":\"TaskScore\",\"OldValue\":\"\",\"NewValue\":\"0\"},{\"TypeName\":\"EnvironmentScore\",\"OldValue\":\"\",\"NewValue\":\"0\"},{\"TypeName\":\"ServiceScore\",\"OldValue\":\"\",\"NewValue\":\"0\"},{\"TypeName\":\"Avrg\",\"OldValue\":\"\",\"NewValue\":\"0\"},{\"TypeName\":\"DianpingCityId\",\"OldValue\":\"\",\"NewValue\":\"1\"},{\"TypeName\":\"District\",\"OldValue\":\"\",\"NewValue\":\"840\"},{\"TypeName\":\"Maptype\",\"OldValue\":\"\",\"NewValue\":\"1\"},{\"TypeName\":\"CanSwingCard\",\"OldValue\":\"\",\"NewValue\":\"0\"}]";
-            Regex rrrrrrrrrrrrrrr = new Regex("{\"TypeName\":\"District\",\"OldValue\":\"(?<old>[\\d]+)\",\"NewValue\":\"(?<new>[\\d]+)\"}");
+            Regex rrrrrrrrrrrrrrr = new Regex("(?<p1>[\\d-]+)/[\\d]+");
             Match mmm = rrrrrrrrrrrrrrr.Match(sssp);
-            string sss = mmm.Groups[0].Value;
+            string sss = mmm.Groups["p1"].Value;
             bool b = mmm.Success;
 
             sssp = sssp.Replace(sss, null);

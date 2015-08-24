@@ -12,13 +12,22 @@ namespace Fund.Web.Admin.Web.EntityLayer
     /// <typeparam name="T"></typeparam>
     public class ResultInfo<T>
     {
+        public ResultInfo()
+        {
+        }
+
+        public ResultInfo(bool isSuc)
+        {
+            isSuccess = isSuc;
+        }
+
         private bool isSuccess = false;
         public bool IsSuccess
         {
             get { return isSuccess; }
             set { isSuccess = value; }
         }
-        private string message = "";
+        private string message = null;
         public string Message
         {
             get { return message; }
@@ -27,10 +36,13 @@ namespace Fund.Web.Admin.Web.EntityLayer
         public T Result { get; set; }
 
 
-        public void SetValue(T value)
+        public ResultInfo<T> SetValue(T value, string msg = null)
         {
             isSuccess = true;
             Result = value;
+            if (msg != null)
+                message = msg;
+            return this;
         }
     }
 }

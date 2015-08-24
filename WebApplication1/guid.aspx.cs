@@ -7,17 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace WebApplication1
 {
-    public partial class define : Page
+    public partial class guid : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (作死)
-            {
-
-            }
-
+            string s = Guid.NewGuid().ToString();
         }
-
-        public bool 作死 { get; set; }
     }
 }

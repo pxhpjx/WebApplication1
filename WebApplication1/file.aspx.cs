@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
+using System.Text;
 
 namespace WebApplication1
 {
@@ -12,6 +13,8 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string s = File.ReadAllText(@"C:\420.txt", Encoding.GetEncoding("GB2312"));
+
             File.Create("C:\\cf").Dispose();
         }
     }

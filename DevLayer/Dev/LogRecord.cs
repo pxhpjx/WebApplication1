@@ -7,12 +7,16 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Threading;
 
 namespace WebApplication1
 {
     public static class LogRecord
     {
         private static string LogPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log");
+        private static Thread LogTimer = null;
+        private static object LogLock = new object();
+        private static LogQueue Queue = new LogQueue();
 
         #region 文本日志
 
@@ -44,6 +48,66 @@ namespace WebApplication1
             else
                 content = string.Format("[{0}]\r\n{1}\r\n", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), content);
             WriteFile(dirPath, fileName, content);
+        }
+
+        public static void WriteLogExt(string content, string type = null, bool isSingleLine = true)
+        {
+            if (LogTimer == null)
+            {
+                lock (LogLock)
+                {
+                    if (LogTimer == null)
+                    {
+                        LogTimer = new Thread(() =>
+                        {
+                            while (true)
+                            {
+                                LogTimer_Elapsed();
+                                Thread.Sleep(2000);
+                            }
+                        });
+                        LogTimer.IsBackground = true;
+                        LogTimer.Start();
+                    }
+                }
+            }
+            if (isSingleLine)
+                content = string.Format("[{0}]\t{1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), content);
+            else
+                content = string.Format("[{0}]\r\n{1}\r\n", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), content);
+            Log l = new Log();
+            l.DirPath = string.IsNullOrWhiteSpace(type) ? LogPath : Path.Combine(LogPath, type);
+            l.FileName = DateTime.Now.ToString("yyyy-MM-dd") + ".log";
+            l.Content = content;
+            lock (LogLock)
+            {
+                Queue.StorageQueue.Add(l);
+            }
+        }
+
+        static void LogTimer_Elapsed()
+        {
+            if (Queue.WorkingQueue.Count == 0)
+            {
+                if (Queue.StorageQueue.Count == 0)
+                    return;
+                lock (LogLock)
+                {
+                    Queue.SwitchQueue();
+                }
+            }
+            try
+            {
+                while (Queue.WorkingQueue.Count > 0)
+                {
+                    WriteFile(Queue.WorkingQueue[0].DirPath, Queue.WorkingQueue[0].FileName, Queue.WorkingQueue[0].Content);
+                    Queue.WorkingQueue.RemoveAt(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.ToString());
+            }
         }
 
         public static void WriteLog(LogInfo log)
@@ -79,14 +143,11 @@ namespace WebApplication1
                     writer.WriteLine(str);
                 writer.Flush();
             }
-            catch (Exception ex)
-            {
-                WriteLog("Save Error：" + ex.Message, "SelfError");
-            }
+            catch { }
             if (writer != null)
-                writer.Close();
+                writer.Dispose();
             if (stream != null)
-                stream.Close();
+                stream.Dispose();
         }
 
         /// <summary>
@@ -97,7 +158,7 @@ namespace WebApplication1
         /// <param name="content"></param>
         /// <param name="encoding"></param>
         /// <param name="fileMode"></param>
-        private static void WriteFile(string dirPath, string fileName, string content, string encoding = "UTF-8", FileMode fileMode = FileMode.OpenOrCreate)
+        private static bool WriteFile(string dirPath, string fileName, string content, string encoding = "UTF-8", FileMode fileMode = FileMode.OpenOrCreate)
         {
             FileStream stream = null;
             StreamWriter writer = null;
@@ -112,11 +173,15 @@ namespace WebApplication1
                 writer.WriteLine(content);
                 writer.Flush();
             }
-            catch { }
+            catch
+            {
+                return false;
+            }
             if (writer != null)
-                writer.Close();
+                writer.Dispose();
             if (stream != null)
-                stream.Close();
+                stream.Dispose();
+            return true;
         }
 
         public static string ReadFile(string filePath, string encoding = "UTF-8")
@@ -130,7 +195,7 @@ namespace WebApplication1
             }
             catch { }
             if (reader != null)
-                reader.Close();
+                reader.Dispose();
             return result;
         }
 
@@ -142,9 +207,9 @@ namespace WebApplication1
         /// 记录不包含子节点简单格式XML日志
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="Item"></param>
-        /// <param name="Subfolder"></param>
-        public static void WriteSampleXmlLog<T>(T Item, string Subfolder = "")
+        /// <param name="item"></param>
+        /// <param name="subfolder"></param>
+        public static void WriteSampleXmlLog<T>(T item, string subfolder = "")
         {
             XmlDocument doc = new XmlDocument();
             XmlDeclaration dec = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
@@ -160,32 +225,32 @@ namespace WebApplication1
             foreach (PropertyInfo p in Props)
             {
                 string ElementName = p.Name.Substring(0);
-                object ElementValue = p.GetValue(Item, null);
+                object ElementValue = p.GetValue(item, null);
                 XmlElement element = doc.CreateElement(ElementName);
                 element.InnerText = ElementValue == null ? "" : ElementValue.ToString();
                 root.AppendChild(element);
             }
-            string Path = LogPath + "\\" + Subfolder;
+            string Path = LogPath + "\\" + subfolder;
             if (!Directory.Exists(Path))
                 Directory.CreateDirectory(Path);
-            doc.Save(Path + (Subfolder != "" ? "\\" : "") + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".xml");
+            doc.Save(Path + (subfolder != "" ? "\\" : "") + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".xml");
         }
 
         /// <summary>
         /// 读取指定文件夹中指定数目的XML日志
         /// </summary>
-        /// <param name="Amount"></param>
-        /// <param name="Subfolder"></param>
+        /// <param name="amount"></param>
+        /// <param name="subfolder"></param>
         /// <returns></returns>
-        public static List<XmlDocument> ReadXmlLogs(int Amount, string Subfolder = "")
+        public static List<XmlDocument> ReadXmlLogs(int amount, string subfolder = "")
         {
             List<XmlDocument> Result = new List<XmlDocument>();
             try
             {
-                string[] Files = System.IO.Directory.GetFiles(LogPath + (string.IsNullOrWhiteSpace(Subfolder) ? "" : "\\") + Subfolder, "*.xml");
-                if (Amount > Files.Length)
-                    Amount = Files.Length;
-                for (int i = Files[0].Length - 1; i >= Files.Length - Amount; i--)
+                string[] Files = System.IO.Directory.GetFiles(LogPath + (string.IsNullOrWhiteSpace(subfolder) ? "" : "\\") + subfolder, "*.xml");
+                if (amount > Files.Length)
+                    amount = Files.Length;
+                for (int i = Files[0].Length - 1; i >= Files.Length - amount; i--)
                 {
                     XmlDocument Doc = new XmlDocument();
                     Doc.Load(Files[i]);
@@ -200,19 +265,19 @@ namespace WebApplication1
         /// 读取指定文件夹中指定数目的日志实体
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="Amount"></param>
-        /// <param name="Subfolder"></param>
+        /// <param name="amount"></param>
+        /// <param name="subfolder"></param>
         /// <returns></returns>
-        public static List<T> ReadXmlLogs<T>(int Amount, string Subfolder = "")
+        public static List<T> ReadXmlLogs<T>(int amount, string subfolder = "")
         {
             List<T> Result = new List<T>();
             XmlReader xr = null;
             try
             {
-                string[] Files = System.IO.Directory.GetFiles(LogPath + (string.IsNullOrWhiteSpace(Subfolder) ? "" : "\\") + Subfolder, "*.xml");
-                if (Amount > Files.Length)
-                    Amount = Files.Length;
-                for (int i = Files.Length - 1; i >= Files.Length - Amount; i--)
+                string[] Files = System.IO.Directory.GetFiles(LogPath + (string.IsNullOrWhiteSpace(subfolder) ? "" : "\\") + subfolder, "*.xml");
+                if (amount > Files.Length)
+                    amount = Files.Length;
+                for (int i = Files.Length - 1; i >= Files.Length - amount; i--)
                 {
                     XmlSerializer serializer = new XmlSerializer(typeof(T));
                     xr = XmlReader.Create(Files[i], null);
@@ -231,18 +296,18 @@ namespace WebApplication1
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="item"></param>
-        /// <param name="Subfolder"></param>
-        public static void WriteSerXmlLog<T>(T item, string Subfolder = "")
+        /// <param name="subfolder"></param>
+        public static void WriteSerXmlLog<T>(T item, string subfolder = "")
         {
             XmlDocument xml = new XmlDocument();
             XmlWriter xw = null;
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(T));
-                string Path = LogPath + "\\" + Subfolder;
+                string Path = LogPath + "\\" + subfolder;
                 if (!Directory.Exists(Path))
                     Directory.CreateDirectory(Path);
-                xw = XmlWriter.Create(Path + (Subfolder != "" ? "\\" : "") + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".xml");
+                xw = XmlWriter.Create(Path + (subfolder != "" ? "\\" : "") + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".xml");
                 serializer.Serialize(xw, item);
             }
             catch { }
@@ -254,18 +319,18 @@ namespace WebApplication1
         /// 读可序列化实体的XML日志
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="Path"></param>
+        /// <param name="path"></param>
         /// <returns></returns>
-        public static T ReadSerXmlLog<T>(string Path)
+        public static T ReadSerXmlLog<T>(string path)
         {
             T result = default(T);
             XmlReader xr = null;
             try
             {
-                if (File.Exists(Path))
+                if (File.Exists(path))
                 {
                     XmlSerializer serializer = new XmlSerializer(typeof(T));
-                    xr = XmlReader.Create(Path, null);
+                    xr = XmlReader.Create(path, null);
                     result = (T)serializer.Deserialize(xr);
                 }
             }
@@ -276,6 +341,44 @@ namespace WebApplication1
         }
 
         #endregion
+
+        private class Log
+        {
+            public string DirPath { get; set; }
+
+            public string FileName { get; set; }
+
+            public string Content { get; set; }
+        }
+
+        private class LogQueue
+        {
+            public LogQueue()
+            {
+                workIndex = 0;
+                queues = new List<Log>[] { new List<Log>(), new List<Log>() };
+            }
+
+            private int workIndex { get; set; }
+
+            private List<Log>[] queues { get; set; }
+
+            public List<Log> StorageQueue
+            {
+                get { return queues[1 - workIndex]; }
+            }
+
+            public List<Log> WorkingQueue
+            {
+                get { return queues[workIndex]; }
+            }
+
+            public void SwitchQueue()
+            {
+                workIndex = 1 - workIndex;
+            }
+        }
+
     }
 
 
