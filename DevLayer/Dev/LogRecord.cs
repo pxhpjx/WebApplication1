@@ -297,17 +297,21 @@ namespace WebApplication1
         /// <typeparam name="T"></typeparam>
         /// <param name="item"></param>
         /// <param name="subfolder"></param>
-        public static void WriteSerXmlLog<T>(T item, string subfolder = "")
+        public static void WriteSerXmlLog<T>(T item, string subfolder = null, string fileName = null)
         {
             XmlDocument xml = new XmlDocument();
             XmlWriter xw = null;
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(T));
-                string Path = LogPath + "\\" + subfolder;
-                if (!Directory.Exists(Path))
-                    Directory.CreateDirectory(Path);
-                xw = XmlWriter.Create(Path + (subfolder != "" ? "\\" : "") + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".xml");
+                string dir = LogPath;
+                if (!string.IsNullOrWhiteSpace(subfolder))
+                    dir += "\\" + subfolder;
+                if (!Directory.Exists(dir))
+                    Directory.CreateDirectory(dir);
+                if (string.IsNullOrWhiteSpace(fileName))
+                    fileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".xml";
+                xw = XmlWriter.Create(Path.Combine(dir, fileName));
                 serializer.Serialize(xw, item);
             }
             catch { }

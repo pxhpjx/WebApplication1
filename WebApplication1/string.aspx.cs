@@ -12,6 +12,10 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string s1 = "狗蛋";
+            string s2 = SpaceStringByByte(s1, Encoding.GetEncoding("GB2312"), 5, 'z', false);
+            s1.oooooooooo();
+
             string sss = "0001一楼      营业    张三      2015-08-20 00:00:00.000   ";
             string rrrrrr = CutOutStringByByte(ref sss, Encoding.GetEncoding("GB2312"), 4);
             rrrrrr = CutOutStringByByte(ref sss, Encoding.GetEncoding("GB2312"), 10);
@@ -74,6 +78,33 @@ namespace WebApplication1
                 cur++;
             }
             return null;
+        }
+
+        string SpaceStringByByte(string oriStr, Encoding encoding, int len, char spaceChar, bool isRightSpace)
+        {
+            if (oriStr == null)
+                oriStr = string.Empty;
+            if (encoding == null || len <= 0 || oriStr.Length > len)
+                return null;
+            string result = null;
+            int count = 0;
+            foreach (char c in oriStr)
+            {
+                byte[] bs = encoding.GetBytes(new char[] { c });
+                count += bs.Length;
+                if (count > len)
+                    return null;
+                result += c;
+            }
+            while (count < len)
+            {
+                count++;
+                if (isRightSpace)
+                    result += spaceChar;
+                else
+                    result = spaceChar + result;
+            }
+            return result;
         }
     }
 }

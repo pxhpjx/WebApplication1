@@ -14,15 +14,34 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string str = "zzz:667  192.168.1.1:667 :667 192.168.1.2:567";
+            Regex reg = new Regex("192.168.1.1:(?<port>[\\d]+)");
+            string m = reg.Replace(str, "eee");
+
+
 
             string sssp = "http://i1.s1.dpfile.com/2008-02-01/330397_b.jpg(139c100)/thumb.jpg";
-            string ssp = "[{\"TypeName\":\"ResName\",\"OldValue\":\"\",\"NewValue\":\"一线烫捞(金虹桥店)\"},{\"TypeName\":\"ShopName\",\"OldValue\":\"\",\"NewValue\":\"金虹桥店\"},{\"TypeName\":\"CuisineIds\",\"OldValue\":\"\",\"NewValue\":\"221\"},{\"TypeName\":\"RegionIds\",\"OldValue\":\"\",\"NewValue\":\"840\"},{\"TypeName\":\"BusinessStatus\",\"OldValue\":\"\",\"NewValue\":\"正常\"},{\"TypeName\":\"Address\",\"OldValue\":\"\",\"NewValue\":\"茅台路179号金虹桥国际中心商场\"},{\"TypeName\":\"TaskScore\",\"OldValue\":\"\",\"NewValue\":\"0\"},{\"TypeName\":\"EnvironmentScore\",\"OldValue\":\"\",\"NewValue\":\"0\"},{\"TypeName\":\"ServiceScore\",\"OldValue\":\"\",\"NewValue\":\"0\"},{\"TypeName\":\"Avrg\",\"OldValue\":\"\",\"NewValue\":\"0\"},{\"TypeName\":\"DianpingCityId\",\"OldValue\":\"\",\"NewValue\":\"1\"},{\"TypeName\":\"District\",\"OldValue\":\"\",\"NewValue\":\"840\"},{\"TypeName\":\"Maptype\",\"OldValue\":\"\",\"NewValue\":\"1\"},{\"TypeName\":\"CanSwingCard\",\"OldValue\":\"\",\"NewValue\":\"0\"}]";
-            Regex rrrrrrrrrrrrrrr = new Regex("(?<p1>[\\d-]+)/[\\d]+");
-            Match mmm = rrrrrrrrrrrrrrr.Match(sssp);
-            string sss = mmm.Groups["p1"].Value;
-            bool b = mmm.Success;
+            //string ssp = "[{\"TypeName\":\"ResName\",\"OldValue\":\"\",\"NewValue\":\"一线烫捞(金虹桥店)\"},{\"TypeName\":\"ShopName\",\"OldValue\":\"\",\"NewValue\":\"金虹桥店\"},{\"TypeName\":\"CuisineIds\",\"OldValue\":\"\",\"NewValue\":\"221\"},{\"TypeName\":\"RegionIds\",\"OldValue\":\"\",\"NewValue\":\"840\"},{\"TypeName\":\"BusinessStatus\",\"OldValue\":\"\",\"NewValue\":\"正常\"},{\"TypeName\":\"Address\",\"OldValue\":\"\",\"NewValue\":\"茅台路179号金虹桥国际中心商场\"},{\"TypeName\":\"TaskScore\",\"OldValue\":\"\",\"NewValue\":\"0\"},{\"TypeName\":\"EnvironmentScore\",\"OldValue\":\"\",\"NewValue\":\"0\"},{\"TypeName\":\"ServiceScore\",\"OldValue\":\"\",\"NewValue\":\"0\"},{\"TypeName\":\"Avrg\",\"OldValue\":\"\",\"NewValue\":\"0\"},{\"TypeName\":\"DianpingCityId\",\"OldValue\":\"\",\"NewValue\":\"1\"},{\"TypeName\":\"District\",\"OldValue\":\"\",\"NewValue\":\"840\"},{\"TypeName\":\"Maptype\",\"OldValue\":\"\",\"NewValue\":\"1\"},{\"TypeName\":\"CanSwingCard\",\"OldValue\":\"\",\"NewValue\":\"0\"}]";
+            //Regex rrrrrrrrrrrrrrr = new Regex("(?<p1>[\\d-]+)/[\\d]+");
+            //Match mmm = rrrrrrrrrrrrrrr.Match(sssp);
+            //string sss = mmm.Groups["p1"].Value;
+            //bool b = mmm.Success;
 
-            sssp = sssp.Replace(sss, null);
+            ////rrrrrrrrrrrrrrr.Replace(ssp,)
+
+            //sssp = sssp.Replace(sss, null);
+
+
+            //return;
+
+
+
+
+            //string h = GetFromFile<string>("D:\\DianPingMobileData\\city_1\\11548063\\main.html");
+
+            //Regex rrrrr = new Regex("href=\"/shop/[\\d]+/product-[\\S]+?\"");
+
+            //Match mmmm = rrrrr.Match(h.Replace("\n", ""));
 
 
             return;
@@ -30,39 +49,27 @@ namespace WebApplication1
 
 
 
-            string h = GetFromFile<string>("D:\\DianPingMobileData\\city_1\\11548063\\main.html");
-
-            Regex rrrrr = new Regex("href=\"/shop/[\\d]+/product-[\\S]+?\"");
-
-            Match mmmm = rrrrr.Match(h.Replace("\n", ""));
 
 
-            return;
-
-
-
-
-
-
-            string html = GetFromFile<string>("C:\\1.html");
-            Regex regbc = new Regex("<div class=\"breadcrumb\">[\\s\\S]+?</div>");
-            string bc = RegexMatchHelper.MatchValue(html, regbc, "0");
-            Regex r = new Regex("http://www.dianping.com/search/category/[\\0-9g]+r(?<r>[0-9]+)");
-            Regex c = new Regex("http://www.dianping.com/search/category/[\\0-9r]+g(?<c>[0-9]+)");
-            List<string> ls = new List<string>();
-            var m = r.Match(bc);
-            while (m.Success)
-            {
-                ls.Add(m.Groups["r"].Value);
-                m = m.NextMatch();
-            }
-            m = c.Match(bc);
-            while (m.Success)
-            {
-                ls.Add(m.Groups["c"].Value);
-                m = m.NextMatch();
-            }
-            string branh = RegexMatchHelper.MatchValue(html, new Regex("href=\"/addshop/[\\d]+_10/id=(?<no>[\\d]+)\""), "no");
+            //string html = GetFromFile<string>("C:\\1.html");
+            //Regex regbc = new Regex("<div class=\"breadcrumb\">[\\s\\S]+?</div>");
+            //string bc = RegexMatchHelper.MatchValue(html, regbc, "0");
+            //Regex r = new Regex("http://www.dianping.com/search/category/[\\0-9g]+r(?<r>[0-9]+)");
+            //Regex c = new Regex("http://www.dianping.com/search/category/[\\0-9r]+g(?<c>[0-9]+)");
+            //List<string> ls = new List<string>();
+            //var m = r.Match(bc);
+            //while (m.Success)
+            //{
+            //    ls.Add(m.Groups["r"].Value);
+            //    m = m.NextMatch();
+            //}
+            //m = c.Match(bc);
+            //while (m.Success)
+            //{
+            //    ls.Add(m.Groups["c"].Value);
+            //    m = m.NextMatch();
+            //}
+            //string branh = RegexMatchHelper.MatchValue(html, new Regex("href=\"/addshop/[\\d]+_10/id=(?<no>[\\d]+)\""), "no");
 
 
             return;

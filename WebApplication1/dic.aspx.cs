@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -11,6 +13,16 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
+            using (StreamReader sr = new StreamReader("C:\\Mobile2PortNo"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                Dictionary<string, int> d = bf.Deserialize(sr.BaseStream) as Dictionary<string, int>;
+            }
+
+
+
             Dictionary<string, int> dic = new Dictionary<string, int>();
             //int q = dic["zzzzzzz"];
             dic["sss"] = 1;

@@ -20,6 +20,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -111,14 +112,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="aabstract.aspx" />
     <Content Include="as.aspx" />
     <Content Include="attr.aspx" />
     <Content Include="AutoSupply.aspx" />
     <Content Include="base64.aspx" />
-    <Content Include="chartdemo\chartfloat.js" />
-    <Content Include="chartdemo\chartfix.js" />
-    <Content Include="chartdemo\chartfix.aspx" />
-    <Content Include="chartdemo\chartfloat.aspx" />
     <Content Include="classequal.aspx" />
     <Content Include="clone.aspx" />
     <Content Include="CompareInt.aspx" />
@@ -135,11 +133,13 @@
     <Content Include="css\reset.css">
       <DependentUpon>reset.scss</DependentUpon>
     </Content>
+    <Content Include="cutstring.aspx" />
     <Content Include="datetime.aspx" />
     <Content Include="default.aspx" />
     <Content Include="define.aspx" />
     <Content Include="dele.aspx" />
     <Content Include="des.aspx" />
+    <Content Include="diagnostics.aspx" />
     <Content Include="dic.aspx" />
     <Content Include="dicexist.aspx" />
     <Content Include="Dict\ChsDoubleName1.txt">
@@ -181,7 +181,6 @@
     <Content Include="guid.aspx" />
     <Content Include="hashtablet.aspx" />
     <Content Include="htmldecode.aspx" />
-    <Content Include="httpruntimecache.aspx" />
     <Content Include="index.aspx" />
     <Content Include="Inheritance.aspx" />
     <Content Include="ip.aspx" />
@@ -235,6 +234,7 @@
     <Content Include="oracle.aspx" />
     <Content Include="outref.aspx" />
     <Content Include="overwrite.aspx" />
+    <Content Include="parse.aspx" />
     <Content Include="pic\2MLQWGTf92.jpg" />
     <Content Include="pic\2MLTMIViVh.jpg" />
     <Content Include="pic\2SFp3i2UhQ.jpg" />
@@ -306,6 +306,13 @@
     <Content Include="NewFolder1\XMLFile1.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="aabstract.aspx.cs">
+      <DependentUpon>aabstract.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="aabstract.aspx.designer.cs">
+      <DependentUpon>aabstract.aspx</DependentUpon>
+    </Compile>
     <Compile Include="as.aspx.cs">
       <DependentUpon>as.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -333,20 +340,6 @@
     </Compile>
     <Compile Include="base64.aspx.designer.cs">
       <DependentUpon>base64.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="chartdemo\chartfix.aspx.cs">
-      <DependentUpon>chartfix.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="chartdemo\chartfix.aspx.designer.cs">
-      <DependentUpon>chartfix.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="chartdemo\chartfloat.aspx.cs">
-      <DependentUpon>chartfloat.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="chartdemo\chartfloat.aspx.designer.cs">
-      <DependentUpon>chartfloat.aspx</DependentUpon>
     </Compile>
     <Compile Include="classequal.aspx.cs">
       <DependentUpon>classequal.aspx</DependentUpon>
@@ -398,6 +391,13 @@
     <Compile Include="cpumemery.aspx.designer.cs">
       <DependentUpon>cpumemery.aspx</DependentUpon>
     </Compile>
+    <Compile Include="cutstring.aspx.cs">
+      <DependentUpon>cutstring.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cutstring.aspx.designer.cs">
+      <DependentUpon>cutstring.aspx</DependentUpon>
+    </Compile>
     <Compile Include="datetime.aspx.cs">
       <DependentUpon>datetime.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -432,6 +432,13 @@
     </Compile>
     <Compile Include="des.aspx.designer.cs">
       <DependentUpon>des.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="diagnostics.aspx.cs">
+      <DependentUpon>diagnostics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="diagnostics.aspx.designer.cs">
+      <DependentUpon>diagnostics.aspx</DependentUpon>
     </Compile>
     <Compile Include="dic.aspx.cs">
       <DependentUpon>dic.aspx</DependentUpon>
@@ -499,16 +506,6 @@
     <Compile Include="htmldecode.aspx.cs">
       <DependentUpon>htmldecode.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="htmldecode.aspx.designer.cs">
-      <DependentUpon>htmldecode.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="httpruntimecache.aspx.cs">
-      <DependentUpon>httpruntimecache.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="httpruntimecache.aspx.designer.cs">
-      <DependentUpon>httpruntimecache.aspx</DependentUpon>
     </Compile>
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
@@ -636,6 +633,13 @@
     </Compile>
     <Compile Include="overwrite.aspx.designer.cs">
       <DependentUpon>overwrite.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="parse.aspx.cs">
+      <DependentUpon>parse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="parse.aspx.designer.cs">
+      <DependentUpon>parse.aspx</DependentUpon>
     </Compile>
     <Compile Include="ping.aspx.cs">
       <DependentUpon>ping.aspx</DependentUpon>

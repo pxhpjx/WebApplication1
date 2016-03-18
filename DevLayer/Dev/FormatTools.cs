@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 namespace WebApplication1
 {
     /// <summary>
-    /// PP's FormatTools -20150821 ver-
+    /// PP's FormatTools -20151218 ver-
     /// 数据格式转化工具
     /// </summary>
     public static class FormatTools
@@ -607,7 +607,7 @@ namespace WebApplication1
         /// <typeparam name="T"></typeparam>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static T SampleCopy<T>(T input) where T : class,new()
+        public static T SampleCopy<T>(T input) where T : class, new()
         {
             T Result = null;
             if (input != null)
@@ -636,7 +636,7 @@ namespace WebApplication1
         /// <typeparam name="T"></typeparam>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static T2 SampleCopy<T1, T2>(T1 input) where T2 : class,new()
+        public static T2 SampleCopy<T1, T2>(T1 input) where T2 : class, new()
         {
             T2 Result = null;
             if (input != null)
@@ -798,6 +798,19 @@ namespace WebApplication1
         }
 
         /// <summary>
+        /// 安全移除前导和尾部空白
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string SafeTrim(this string str)
+        {
+            if (str == null)
+                return null;
+            return str.Trim();
+        }
+
+
+        /// <summary>
         /// 切出字符串中指定位置开始指定数目的部分，切出部分会被从源字符串中移除
         /// 若允许越界，越界时自动停止并返回；否则按出错处理
         /// </summary>
@@ -845,6 +858,14 @@ namespace WebApplication1
             {
                 char cc = input[cur];
                 byte[] bs = encoding.GetBytes(new char[] { cc });
+                if (esp < cutStart)
+                {
+                    esp += bs.Length;
+                    cur++;
+                    continue;
+                }
+                if (esp > cutStart && result == string.Empty)
+                    return null;
                 if (encoding.GetBytes(result).Length + bs.Length > cutLen)
                     return null;
                 if (esp >= cutStart)
@@ -859,6 +880,42 @@ namespace WebApplication1
                 cur++;
             }
             return null;
+        }
+
+        /// <summary>
+        /// 按位填充字符串
+        /// </summary>
+        /// <param name="oriStr">原字符串</param>
+        /// <param name="encoding">字符编码</param>
+        /// <param name="len">填充结果长度</param>
+        /// <param name="spaceChar">填充用字符</param>
+        /// <param name="isRightSpace">填充方向</param>
+        /// <returns></returns>
+        public static string SpaceStringByByte(string oriStr, Encoding encoding, int len, char spaceChar, bool isRightSpace)
+        {
+            if (oriStr == null)
+                oriStr = string.Empty;
+            if (encoding == null || len <= 0 || oriStr.Length > len)
+                return null;
+            string result = null;
+            int count = 0;
+            foreach (char c in oriStr)
+            {
+                byte[] bs = encoding.GetBytes(new char[] { c });
+                count += bs.Length;
+                if (count > len)
+                    return null;
+                result += c;
+            }
+            while (count < len)
+            {
+                count++;
+                if (isRightSpace)
+                    result += spaceChar;
+                else
+                    result = spaceChar + result;
+            }
+            return result;
         }
 
         /// <summary>
@@ -890,7 +947,7 @@ namespace WebApplication1
         /// <param name="newObject">新的实体</param>
         /// <param name="ignore">忽略的字段名</param>
         /// <returns></returns>
-        public static string CompareValue<T>(T oldObject, T newObject, List<string> ignore = null) where T : class,new()
+        public static string CompareValue<T>(T oldObject, T newObject, List<string> ignore = null) where T : class, new()
         {
             if (oldObject == null && newObject == null)
                 return null;

@@ -11,6 +11,10 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            DateTime det = (new DateTime(621355968000000000 + 1441683900000 * 10000)).AddHours(8);
+
+
+
             DateTime ddddd = new DateTime(2000, 1, 1);
             long t = ddddd.Ticks;
             DateTime dzzzzf = default(DateTime);

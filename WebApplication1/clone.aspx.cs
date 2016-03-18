@@ -15,6 +15,9 @@ namespace WebApplication1
             people p1, p2 = new people();
             p2.h = new hand();
             p2.h.i = 6;
+            p2.i = 666;
+            p1 = p2.C();
+
             p1 = p2.Clone() as people;
             p2.h.i = 888;
             string s1, s2;
@@ -42,12 +45,20 @@ namespace WebApplication1
 
     class people : ICloneable
     {
+        public int i;
+
         public hand h;
         public object Clone()
         {
             people p = new people();
             p.h = h.Clone() as hand;
             return p;
+        }
+
+
+        public people C()
+        {
+            return (people)this.MemberwiseClone();
         }
     }
 }
